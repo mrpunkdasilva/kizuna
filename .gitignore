@@ -1,33 +1,51 @@
-*.aux
-*.bbl
-*.bcf
-*.blg
-*.fdb_latexmk
-*.fls
-*.log
-*.out
-*.run.xml
-*.synctex.gz
-*.toc
-*.pdf
-*~
+# Git Ignore for Kizuna Copilot Project
 
-# Ignore all files in output/ except README.md
+# IDE and Editor Files
+.idea/
+.project
+.classpath
+.settings/
+.vscode/
+*.iml
+*.iws
+*.ipr
+*.swp
+*~
+.#*
+.DS_Store
+Thumbs.db
+temp/
+tmp/
+
+# Python Specific
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+.env
+
+# Java/Maven/Spring Boot Specific
+target/
+*.jar
+*.war
+*.ear
+*.class
+hs_err_pid*
+.mvn/wrapper/maven-wrapper.jar # Maven Wrapper JAR
+!/.mvn/wrapper/maven-wrapper.properties # Keep wrapper properties
+
+# Docker Specific
+*.log
+docker-compose.override.yml
+.dockerignore
+!docker-compose.yml # Do not ignore the main docker-compose file
+
+# Project Generated Files
 /output/*
 !/output/README.md
 !/output/CURRICULO_GUSTAVO_HENRIQUE_DE_JESUS_DA_SILVA_WEDEVUP.pdf
-
-# Ignore all files in curriculums/ except README.md
 /curriculums/*
 !/curriculums/README.md
 !/curriculums/cv.md
 !/curriculums/curriculo_wedevup.md
-
-# Ignore Python bytecode files
-__pycache__/
-
-# Python virtual environment
-venv/
-
-# Environment variables
-.env
