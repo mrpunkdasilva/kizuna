@@ -1,0 +1,1 @@
+Esta pasta é destinada aos arquivos de saída gerados pelo projeto, como PDFs.

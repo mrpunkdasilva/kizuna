@@ -1,0 +1,76 @@
+openapi: 3.0.0
+info:
+  title: Kizuna Copilot Python Scraper API
+  version: 0.1.0
+  description: API for extracting job information from various platforms. This service is dedicated to web scraping and returns raw job data.
+
+servers:
+  - url: http://localhost:8000
+    description: Python Scraper Local Development Server
+
+paths:
+  /:
+    get:
+      summary: Root endpoint for health check
+      operationId: getRoot
+      responses:
+        '200':
+          description: Service is up and running
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Kizuna Copilot API is up and running!"
+
+  /scrape-job/:
+    post:
+      summary: Scrape job details from a given URL
+      operationId: scrapeJob
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobURL'
+      responses:
+        '200':
+          description: Job data successfully scraped
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "received"
+                  url:
+                    type: string
+                    format: uri
+                    example: "https://www.linkedin.com/jobs/view/..."
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: array
+                    items:
+                      type: object # You might want to define a more detailed error schema here
+
+components:
+  schemas:
+    JobURL:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          description: The URL of the job vacancy to be scraped.
+          example: "https://www.linkedin.com/jobs/view/3807271927/?eBP=NotAllowedSpecialist&refId=k0p%2BTdO6DkR5j42cQ%2B3B9g%3D%3D&trackingId=02%2FrqfQy2V5zG1nJd3bMdg%3D%3D&trk=flagship3_job_discovery_jymbii"
+      required:
+        - url

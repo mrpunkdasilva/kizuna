@@ -1,0 +1,91 @@
+openapi: 3.0.0
+info:
+  title: Kizuna Copilot Spring Boot Backend API
+  version: 0.1.0
+  description: Main backend API for the Kizuna Copilot. This service orchestrates calls to the Python Scraper, interacts with LLMs (Ollama), and manages the resume adaptation process.
+
+servers:
+  - url: http://localhost:8080
+    description: Spring Boot Backend Local Development Server
+
+paths:
+  /: 
+    get:
+      summary: Root endpoint for health check (default Spring Boot 404)
+      operationId: getRoot
+      responses:
+        '404':
+          description: Not Found (expected for the default root endpoint without a specific controller)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  timestamp:
+                    type: string
+                    format: date-time
+                    example: "2026-01-24T03:16:35.776+00:00"
+                  status:
+                    type: integer
+                    example: 404
+                  error:
+                    type: string
+                    example: "Not Found"
+                  path:
+                    type: string
+                    example: "/"
+
+  /process-job-vacancy:
+    post:
+      summary: Process a job vacancy URL to generate an adapted resume
+      operationId: processJobVacancy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobProcessRequest'
+      responses:
+        '200':
+          description: Job vacancy processed and resume adapted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobTitle:
+                    type: string
+                    example: "Software Engineer"
+                  company:
+                    type: string
+                    example: "Tech Solutions Inc."
+                  adaptedSummary:
+                    type: string
+                    example: "Highly motivated Software Engineer with 5+ years of experience, adapted to requirements for distributed systems and cloud microservices."
+                  generatedMarkdown:
+                    type: string
+                    example: "# Software Engineer Resume\n\n## Summary\nHighly motivated..."
+                  # More fields for the adapted resume could go here
+        '400':
+          description: Invalid URL or processing error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Invalid job URL provided or an error occurred during processing."
+
+components:
+  schemas:
+    JobProcessRequest:
+      type: object
+      properties:
+        jobUrl:
+          type: string
+          format: uri
+          description: The URL of the job vacancy to be processed.
+          example: "https://www.linkedin.com/jobs/view/..."
+      required:
+        - jobUrl

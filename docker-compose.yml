@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  ollama:
+    image: ollama/ollama
+    container_name: ollama
+    # Se você tem GPU NVIDIA e o nvidia-container-toolkit instalado, descomente a linha abaixo:
+    # gpus: all
+    # Se você tem GPU Intel (como no seu caso) e mapeou /dev/dri:
+    # devices:
+    #   - /dev/dri:/dev/dri
+    volumes:
+      - ollama_data:/root/.ollama # Persiste os modelos baixados
+    ports:
+      - "11434:11434" # Expõe a API do Ollama para o host
+    restart: always # Garante que o Ollama reinicie com o Docker
+
+  python-scraper:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: python-scraper
+    container_name: python_scraper
+    depends_on:
+      - ollama # O scraper pode não precisar diretamente do ollama, mas o springboot-app vai
+    ports:
+      - "8000:8000" # Porta para o serviço FastAPI
+    volumes:
+      - ./backend:/app # Mapeia o diretório do seu backend para dentro do contêiner
+    working_dir: /app
+    environment:
+      OLLAMA_HOST: http://ollama:11434 # Caso o scraper precise acessar o ollama diretamente
+    restart: always
+
+  springboot-app:
+    build:
+      context: ./springboot-app
+      dockerfile: Dockerfile
+    image: springboot-app
+    container_name: springboot_app
+    depends_on:
+      - ollama
+      - python-scraper
+    ports:
+      - "8080:8080" # Porta para a aplicação Spring Boot
+    volumes:
+      - ./springboot-app:/app # Mapeia o diretório do seu springboot-app para dentro do contêiner
+    environment:
+      # Configurações para o Spring Boot acessar os outros serviços
+      OLLAMA_HOST: http://ollama:11434
+      PYTHON_SCRAPER_HOST: http://python-scraper:8000
+    restart: always
+
+volumes:
+  ollama_data: # Define o volume para persistência dos dados do Ollama

@@ -1,0 +1,33 @@
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.pdf
+*~
+
+# Ignore all files in output/ except README.md
+/output/*
+!/output/README.md
+!/output/CURRICULO_GUSTAVO_HENRIQUE_DE_JESUS_DA_SILVA_WEDEVUP.pdf
+
+# Ignore all files in curriculums/ except README.md
+/curriculums/*
+!/curriculums/README.md
+!/curriculums/cv.md
+!/curriculums/curriculo_wedevup.md
+
+# Ignore Python bytecode files
+__pycache__/
+
+# Python virtual environment
+venv/
+
+# Environment variables
+.env
