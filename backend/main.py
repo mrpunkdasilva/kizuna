@@ -1,12 +1,14 @@
-import requests
+import os
 from bs4 import BeautifulSoup
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, HttpUrl
+from selenium import webdriver
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
 app = FastAPI(
     title="Kizuna Copilot API",
     description="API para extrair e processar dados de vagas de emprego.",
-    version="0.1.0",
+    version="0.2.0",
 )
 
 
@@ -19,7 +21,6 @@ class ScrapedJobData(BaseModel):
     company: str | None = None
     location: str | None = None
     description: str | None = None
-    # Add other fields as needed
 
 
 @app.get("/")
@@ -31,29 +32,34 @@ async def root():
 @app.post("/scrape-job/", response_model=ScrapedJobData)
 async def scrape_job(job_url: JobURL):
     """
-    Endpoint para receber a URL de uma vaga, extrair os dados e retorná-los.
+    Endpoint para receber a URL de uma vaga, extrair os dados e retorná-los usando Selenium.
     """
+    selenium_hub_url = os.getenv("SELENIUM_HUB_URL")
+    if not selenium_hub_url:
+        raise HTTPException(status_code=500, detail="SELENIUM_HUB_URL environment variable not set.")
+
+    options = FirefoxOptions()
+    options.add_argument("--headless")
+    
+    driver = None
     try:
-        headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
-        }
-        response = requests.get(str(job_url.url), headers=headers)
-        response.raise_for_status()  # Levanta um erro HTTP para status de erro (4xx ou 5xx)
+        driver = webdriver.Remote(
+            command_executor=selenium_hub_url,
+            options=options
+        )
+        
+        driver.get(str(job_url.url))
+        
+        driver.implicitly_wait(10)
 
-        soup = BeautifulSoup(response.text, 'html.parser')
+        page_source = driver.page_source
+        soup = BeautifulSoup(page_source, 'html.parser')
 
-        # --- Lógica de extração de dados do LinkedIn ---
-        # Estes seletores podem precisar de ajustes se o LinkedIn mudar sua estrutura HTML.
-        # title = soup.find('h1', class_='topcard__title')
-        # company = soup.find('a', class_='topcard__org-name-link')
-        # location = soup.find('span', class_='topcard__flavor topcard__flavor--bullet')
-        # description_div = soup.find('div', class_='description__text description__text--rich')
-
-        # Updated selectors for LinkedIn based on current observation (Jan 2026)
-        title = soup.find('p', class_='d6702861 e4111e1d _655037c4 _185fef28 aedc8401 b90d48f3 bc8cf9c8 _903d2b03 _2ad2a80d')
-        company_elem = soup.find('a', class_='job-details-jobs-unified-top-card__company-name')
-        location_elem = soup.find('span', class_='job-details-jobs-unified-top-card__job-location')
-        description_div = soup.find('p', class_='d6702861 _06170c11 _655037c4 _185fef28 d065caac df5b4656 bc8cf9c8 _903d2b03 _2ad2a80d')
+        # --- Novos seletores identificados ---
+        title = soup.find('h1', class_='top-card-layout__title')
+        company_elem = soup.find('a', class_='topcard__org-name-link')
+        location_elem = soup.find('span', class_='topcard__flavor--bullet')
+        description_div = soup.find('div', class_='description__text')
 
         extracted_data = {
             "title": title.get_text(strip=True) if title else None,
@@ -64,7 +70,8 @@ async def scrape_job(job_url: JobURL):
 
         return ScrapedJobData(**extracted_data)
 
-    except requests.exceptions.RequestException as e:
-        raise HTTPException(status_code=400, detail=f"Error fetching URL: {e}")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error during scraping: {e}")
+    finally:
+        if driver:
+            driver.quit()
