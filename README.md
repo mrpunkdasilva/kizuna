@@ -18,9 +18,14 @@ O projeto é dividido nos seguintes serviços principais:
     *   Responsável por hospedar e gerenciar os modelos de linguagem de grande escala (LLMs) para processamento e geração de conteúdo.
 
 2.  **Python Scraper (`python-scraper`):**
-    *   Um serviço FastAPI em Python dedicado à extração de informações de vagas de emprego de plataformas como o LinkedIn.
-    *   Expõe um endpoint REST para receber URLs de vagas e retornar os dados brutos extraídos.
+    *   Um serviço FastAPI em Python dedicado à extração de informações de vagas de emprego de plataformas como o LinkedIn. Agora utiliza **Selenium para web scraping**, permitindo a extração de conteúdo dinâmico.
+    *   Expõe um endpoint REST para receber URLs de vagas e retornar os dados extraídos.
     *   Porta exposta: `8000`.
+    *   Conecta-se ao **Selenium Hub** (porta `4444`) para orquestrar a automação do navegador.
+
+3.  **Selenium Grid (`selenium-hub` e `firefox-node`):**
+    *   Serviços do Docker que fornecem uma infraestrutura para rodar testes de Selenium em navegadores remotos. O `selenium-hub` coordena os nós (`firefox-node`), que rodam instâncias do navegador Firefox.
+    *   Portas expostas do Hub: `4444` (API de Selenium), `4442` (eventos), `4443` (eventos).
 
 3.  **Spring Boot Backend (`springboot-app`):**
     *   O backend principal da aplicação, construído com Spring Boot em Java.
@@ -36,7 +41,8 @@ O projeto é dividido nos seguintes serviços principais:
 
 ## Pré-requisitos
 
-Certifique-se de ter o Docker e o Docker Compose (com a nova sintaxe `docker compose`) instalados em seu sistema.
+Certifique-se de ter o Docker e o Docker Compose (com a nova sintaxe `docker compose`) instalados em seu sistema. O arquivo `docker-compose.yml` foi atualizado e não requer mais o atributo `version` no cabeçalho.
+Para o funcionamento adequado do web scraping, o **Selenium Grid** é utilizado, o que requer recursos adicionais de CPU/RAM para os contêineres do navegador.
 
 ## Como Usar
 
@@ -54,6 +60,7 @@ Este comando irá:
 *   Baixar a imagem do Ollama.
 *   Construir a imagem do `python-scraper` (FastAPI).
 *   Construir a imagem do `springboot-app` (Spring Boot), instalando OpenJDK e Maven.
+*   **Baixar e iniciar os serviços do Selenium Grid (`selenium-hub` e `firefox-node`)**.
 *   Iniciar todos os contêineres.
 
 ### 2. Baixar o Modelo LLM (Ollama)
@@ -87,7 +94,21 @@ docker compose ps
     ```
     Saída esperada (um erro 404, pois ainda não há endpoints definidos além do padrão): `{"timestamp":"...","status":404,"error":"Not Found","path":"/"}`
 
-### 5. Parar os Serviços
+### 5. Executar Testes
+
+#### Testes Python (Scraper)
+Para executar os testes unitários do serviço Python Scraper (FastAPI), use o seguinte comando dentro do contêiner:
+```bash
+docker compose exec python-scraper pytest test_main.py
+```
+
+#### Testes Spring Boot
+Para executar os testes unitários da aplicação Spring Boot, use o seguinte comando dentro do contêiner:
+```bash
+docker compose exec springboot-app mvn test
+```
+
+### 6. Parar os Serviços
 
 Quando terminar de usar, você pode parar e remover os contêineres:
 ```bash
@@ -102,13 +123,15 @@ Este projeto está em desenvolvimento contínuo.
 
 *   `backend/`: Contém a aplicação Python FastAPI para web scraping.
     *   `main.py`: Lógica da API FastAPI.
-    *   `Dockerfile`: Instruções para construir a imagem Docker do scraper.
-    *   `requirements.txt`: Dependências Python.
+    *   `Dockerfile`: Instruções para construir a imagem Docker do scraper, incluindo Firefox e Geckodriver.
+    *   `requirements.txt`: Dependências Python, incluindo `selenium`, `pytest` e `pytest-asyncio`.
+    *   `test_main.py`: Testes unitários para a API do scraper.
 *   `springboot-app/`: Contém a aplicação Spring Boot principal.
     *   `pom.xml`: Configurações Maven e dependências Java.
     *   `src/`: Código fonte Java e recursos.
     *   `Dockerfile`: Instruções para construir a imagem Docker do backend.
-*   `docker-compose.yml`: Arquivo de orquestração do Docker Compose para todos os serviços.
+    *   `src/test/java/com/mrpunkdasilva/kizunacopilot/KizunaCopilotApplicationTests.java`: Testes unitários para a aplicação Spring Boot.
+*   `docker-compose.yml`: Arquivo de orquestração do Docker Compose para todos os serviços, incluindo Ollama, Python Scraper, Spring Boot Backend, Selenium Hub e Firefox Node.
 *   `data/`: Diretório para dados de entrada (JSONs de currículos, etc.).
 *   `curriculums/`: Diretório para os currículos gerados em Markdown.
 *   `output/`: Diretório para os currículos gerados em PDF.
