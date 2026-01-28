@@ -50,10 +50,10 @@ async def scrape_job(job_url: JobURL):
         # description_div = soup.find('div', class_='description__text description__text--rich')
 
         # Updated selectors for LinkedIn based on current observation (Jan 2026)
-        title = soup.find('h1', class_='job-details-jobs-unified-top-card__job-title')
+        title = soup.find('p', class_='d6702861 e4111e1d _655037c4 _185fef28 aedc8401 b90d48f3 bc8cf9c8 _903d2b03 _2ad2a80d')
         company_elem = soup.find('a', class_='job-details-jobs-unified-top-card__company-name')
         location_elem = soup.find('span', class_='job-details-jobs-unified-top-card__job-location')
-        description_div = soup.find('div', class_='jobs-description__content') # This is often inside another div with class "description__text"
+        description_div = soup.find('p', class_='d6702861 _06170c11 _655037c4 _185fef28 d065caac df5b4656 bc8cf9c8 _903d2b03 _2ad2a80d')
 
         extracted_data = {
             "title": title.get_text(strip=True) if title else None,
