@@ -39,6 +39,7 @@ services:
     depends_on:
       - ollama
       - python-scraper
+      - mongo # Adicionando dependência do MongoDB
     ports:
       - "8080:8080"
     volumes:
@@ -46,6 +47,18 @@ services:
     environment:
       OLLAMA_HOST: http://ollama:11434
       PYTHON_SCRAPER_HOST: http://python-scraper:8000
+      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/kizunacopilot # Configuração para o Spring Boot acessar o MongoDB
+    restart: always
+    networks:
+      - kizuna_network
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017" # Porta padrão do MongoDB
+    volumes:
+      - mongo_data:/data/db # Volume para persistir os dados do MongoDB
     restart: always
     networks:
       - kizuna_network
@@ -76,6 +89,7 @@ services:
 
 volumes:
   ollama_data:
+  mongo_data:
 
 networks:
   kizuna_network:
