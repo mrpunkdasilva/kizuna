@@ -2,6 +2,7 @@ import httpx
 import asyncio
 import json
 import os
+import time
 import traceback
 from bs4 import BeautifulSoup
 
@@ -24,7 +25,6 @@ async def test_ollama_with_html():
     try:
         data = json.loads(content)
         if isinstance(data, dict) and 'html' in data:
-            print("Detectado formato JSON, extraindo conteúdo do campo 'html'...")
             html_content = data['html']
         else:
             html_content = content
@@ -36,9 +36,7 @@ async def test_ollama_with_html():
         script_or_style.decompose()
     
     clean_text = soup.get_text(separator=' ', strip=True)
-    clean_text = clean_text[:2000] # Reduzindo um pouco mais para ajudar a CPU
-
-    print(f"Texto extraído (primeiros 100 caracteres): {clean_text[:100]}...")
+    clean_text = clean_text[:2000] 
 
     prompt = (
         "Extract the job title from the following job posting text. "
@@ -51,16 +49,17 @@ async def test_ollama_with_html():
     print(f"\nVerificando conexão com o Ollama em {ollama_host}...")
     
     try:
-        # Timeout ILIMITADO para ver se o Ollama responde eventualmente
         async with httpx.AsyncClient(timeout=None) as client:
             try:
-                check = await client.get(f"{ollama_host}/api/tags")
-                print(f"Conexão OK! Status: {check.status_code}")
+                await client.get(f"{ollama_host}/api/tags")
             except Exception as e:
-                print(f"FALHA NA CONEXÃO INICIAL: {e}")
+                print(f"FALHA NA CONEXÃO: {e}")
                 return
 
-            print(f"Enviando prompt para o modelo {model}... (Estou sendo MUITO paciente agora!)")
+            print(f"Enviando prompt para o modelo {model}... (Cronômetro iniciado!)")
+            
+            start_time = time.perf_counter() # Início da medição
+            
             response = await client.post(
                 f"{ollama_host}/api/generate",
                 json={
@@ -75,17 +74,37 @@ async def test_ollama_with_html():
                 }
             )
             
+            end_time = time.perf_counter() # Fim da medição
+            duration = end_time - start_time
+            
             if response.status_code == 200:
                 result = response.json()
+                
+                # Extraindo dados de performance do Ollama (vêm em nanossegundos)
+                total_dur_ms = result.get("total_duration", 0) / 1e6
+                load_dur_ms = result.get("load_duration", 0) / 1e6
+                eval_count = result.get("eval_count", 0) # número de tokens gerados
+                eval_dur_ms = result.get("eval_duration", 0) / 1e6
+                
+                tokens_per_sec = (eval_count / (eval_dur_ms / 1000)) if eval_dur_ms > 0 else 0
+
                 try:
                     data = json.loads(result.get("response", "{}"))
                     print("\n--- Resultado da LLM ---")
                     print(json.dumps(data, indent=2, ensure_ascii=False))
                     print("------------------------")
                 except json.JSONDecodeError:
-                    print("\n--- Resposta Bruta (Não é um JSON válido) ---")
+                    print("\n--- Resposta Bruta ---")
                     print(result.get("response"))
-                    print("---------------------------------------------")
+                
+                print(f"\n📊 ANALYTICS SIMPLES:")
+                print(f"⏱️  Tempo total (espera real): {duration:.2f}s")
+                print(f"🧠 Tempo de processamento (Ollama): {total_dur_ms/1000:.2f}s")
+                print(f"📦 Tempo de carga do modelo: {load_dur_ms/1000:.2f}s")
+                print(f"⚡ Velocidade: {tokens_per_sec:.2f} tokens/s")
+                print(f"📝 Tokens gerados: {eval_count}")
+                print(f"------------------------")
+                
             else:
                 print(f"Erro no Ollama: {response.status_code} - {response.text}")
     except Exception:
