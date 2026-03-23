@@ -2,6 +2,9 @@ package com.mrpunkdasilva.kizunacopilot.controller;
 
 import com.mrpunkdasilva.kizunacopilot.model.JobPosting;
 import com.mrpunkdasilva.kizunacopilot.service.JobScrapingService;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

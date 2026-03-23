@@ -12,20 +12,19 @@ services:
 
   python-scraper:
     build:
-      context: ./backend
+      context: ./scrapper
       dockerfile: Dockerfile
     image: python-scraper
     container_name: python_scraper
     depends_on:
       - ollama
-      - selenium-hub
     ports:
       - "8000:8000"
     volumes:
-      - ./backend:/home/appuser/app
+      - ./scrapper:/home/appuser/app
     environment:
       OLLAMA_HOST: http://ollama:11434
-      SELENIUM_HUB_URL: http://selenium-hub:4444/wd/hub
+      OLLAMA_MODEL: deepseek-r1:1.5b
     restart: always
     networks:
       - kizuna_network
@@ -39,15 +38,15 @@ services:
     depends_on:
       - ollama
       - python-scraper
-      - mongo # Adicionando dependência do MongoDB
+      - mongo
     ports:
       - "8080:8080"
     volumes:
       - ./springboot-app:/app
     environment:
       OLLAMA_HOST: http://ollama:11434
-      PYTHON_SCRAPER_HOST: http://python-scraper:8000
-      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/kizunacopilot # Configuração para o Spring Boot acessar o MongoDB
+      PYTHON_SCRAPER_HOST: http://python_scraper:8000
+      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/kizunacopilot
     restart: always
     networks:
       - kizuna_network
@@ -56,33 +55,9 @@ services:
     image: mongo:latest
     container_name: mongo
     ports:
-      - "27017:27017" # Porta padrão do MongoDB
+      - "27017:27017"
     volumes:
-      - mongo_data:/data/db # Volume para persistir os dados do MongoDB
-    restart: always
-    networks:
-      - kizuna_network
-
-  selenium-hub:
-    image: selenium/hub:4.18.1
-    container_name: selenium-hub
-    ports:
-      - "4442:4442"
-      - "4443:4443"
-      - "4444:4444"
-    restart: always
-    networks:
-      - kizuna_network
-
-  firefox:
-    image: selenium/node-firefox:4.18.1
-    container_name: firefox-node
-    depends_on:
-      - selenium-hub
-    environment:
-      - SE_EVENT_BUS_HOST=selenium-hub
-      - SE_EVENT_BUS_PUBLISH_PORT=4442
-      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - mongo_data:/data/db
     restart: always
     networks:
       - kizuna_network

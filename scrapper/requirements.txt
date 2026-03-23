@@ -1,8 +1,7 @@
 fastapi
 uvicorn[standard]
-requests
+httpx
 beautifulsoup4
 pydantic
-selenium
 pytest
 pytest-asyncio
