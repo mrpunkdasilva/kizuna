@@ -36,17 +36,23 @@ async def test_ollama_with_html():
         script_or_style.decompose()
     
     clean_text = soup.get_text(separator=' ', strip=True)
-    clean_text = clean_text[:2000] 
+    clean_text = clean_text[:4000] 
 
     prompt = (
         "Extract the following job information from the text below:\n"
         "- Job Title\n"
         "- Company Name\n"
         "- Location\n"
+        "- Work Style (Remote, Hybrid, or On-site)\n"
+        "- Employment Type (Full-time, Part-time, Contract, etc.)\n"
+        "- Seniority Level\n"
+        "- Salary/Compensation (if mentioned)\n"
         "- Job Description (summary)\n"
         "- Requirements (list)\n"
-        "- Benefits (list)\n\n"
-        "Return ONLY a JSON object with the keys: 'title', 'company', 'location', 'description', 'requirements', 'benefits'.\n"
+        "- Benefits (list)\n"
+        "- Date Posted (e.g., '2 weeks ago')\n"
+        "- Number of Applicants (if mentioned)\n\n"
+        "Return ONLY a JSON object with the keys: 'title', 'company', 'location', 'work_style', 'employment_type', 'seniority', 'salary', 'description', 'requirements', 'benefits', 'posted_at', 'applications_count'.\n"
         "Do not include your thinking process, just the JSON.\n\n"
         f"Text: {clean_text}\n\n"
         "JSON Response:"
