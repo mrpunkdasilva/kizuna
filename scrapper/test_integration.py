@@ -39,8 +39,14 @@ async def test_ollama_with_html():
     clean_text = clean_text[:2000] 
 
     prompt = (
-        "Extract the job title from the following job posting text. "
-        "Return ONLY the answer in JSON format with the key 'title'. "
+        "Extract the following job information from the text below:\n"
+        "- Job Title\n"
+        "- Company Name\n"
+        "- Location\n"
+        "- Job Description (summary)\n"
+        "- Requirements (list)\n"
+        "- Benefits (list)\n\n"
+        "Return ONLY a JSON object with the keys: 'title', 'company', 'location', 'description', 'requirements', 'benefits'.\n"
         "Do not include your thinking process, just the JSON.\n\n"
         f"Text: {clean_text}\n\n"
         "JSON Response:"
