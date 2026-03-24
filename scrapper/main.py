@@ -70,25 +70,35 @@ async def scrape_job(job_url: JobURL):
         clean_text = soup.get_text(separator=' ', strip=True)
         clean_text = clean_text[:4000] 
 
-        # 3. Chamar o Ollama com o prompt completo
+        # 3. Chamar o Ollama com o prompt estruturado
         prompt = (
-            "Extract the following job information from the text below:\n"
-            "- Job Title\n"
-            "- Company Name\n"
-            "- Location\n"
-            "- Work Style (Remote, Hybrid, or On-site)\n"
-            "- Employment Type (Full-time, Part-time, Contract, etc.)\n"
-            "- Seniority Level\n"
-            "- Salary/Compensation (if mentioned)\n"
-            "- Job Description (summary)\n"
-            "- Requirements (list)\n"
-            "- Benefits (list)\n"
-            "- Date Posted (e.g., '2 weeks ago')\n"
-            "- Number of Applicants (if mentioned)\n\n"
-            "Return ONLY a JSON object with the keys: 'title', 'company', 'location', 'work_style', 'employment_type', 'seniority', 'salary', 'description', 'requirements', 'benefits', 'posted_at', 'applications_count'.\n"
-            "Do not include your thinking process, just the JSON.\n\n"
-            f"Text: {clean_text}\n\n"
-            "JSON Response:"
+            "### TASK\n"
+            "Extract job information into JSON. Use ONLY the data found in the text.\n\n"
+            "### JSON SCHEMA\n"
+            "{\n"
+            "  \"title\": string,\n"
+            "  \"company\": string,\n"
+            "  \"location\": string,\n"
+            "  \"work_style\": \"Remote\", \"Hybrid\", or \"On-site\",\n"
+            "  \"employment_type\": string,\n"
+            "  \"seniority\": string,\n"
+            "  \"salary\": string,\n"
+            "  \"description\": string,\n"
+            "  \"requirements\": [string],\n"
+            "  \"benefits\": [string],\n"
+            "  \"posted_at\": string,\n"
+            "  \"applications_count\": string\n"
+            "}\n\n"
+            "### SOURCE TEXT\n"
+            "<text>\n"
+            f"{clean_text}\n"
+            "</text>\n\n"
+            "### INSTRUCTIONS\n"
+            "- Return ONLY valid JSON.\n"
+            "- Use null for missing strings.\n"
+            "- Use [] for missing lists.\n"
+            "- No thinking process.\n\n"
+            "JSON:"
         )
 
         async with httpx.AsyncClient() as client:
@@ -100,7 +110,7 @@ async def scrape_job(job_url: JobURL):
                     "format": "json",
                     "stream": False,
                     "options": {
-                        "num_ctx": 2048,
+                        "num_ctx": 4096,
                         "temperature": 0.0
                     }
                 },
