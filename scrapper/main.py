@@ -24,7 +24,7 @@ class ScrapedJobData(BaseModel):
     seniority: str | None = None
     salary: str | None = None
     description: str | None = None
-    requirements: list[str] | None = None
+    requirements: str | None = None
     benefits: list[str] | None = None
     posted_at: str | None = None
     applications_count: str | None = None
@@ -72,33 +72,27 @@ async def scrape_job(job_url: JobURL):
 
         # 3. Chamar o Ollama com o prompt estruturado
         prompt = (
-            "### TASK\n"
-            "Extract job information into JSON. Use ONLY the data found in the text.\n\n"
+            "### INSTRUCTION\n"
+            "Analyze the job posting text below and extract the information into JSON.\n"
+            "IMPORTANT: The 'description' and 'requirements' fields must be written in detailed prose (full sentences/paragraphs).\n\n"
             "### JSON SCHEMA\n"
             "{\n"
-            "  \"title\": string,\n"
-            "  \"company\": string,\n"
-            "  \"location\": string,\n"
+            "  \"title\": \"job title\",\n"
+            "  \"company\": \"company name\",\n"
+            "  \"location\": \"job location\",\n"
             "  \"work_style\": \"Remote\", \"Hybrid\", or \"On-site\",\n"
-            "  \"employment_type\": string,\n"
-            "  \"seniority\": string,\n"
-            "  \"salary\": string,\n"
-            "  \"description\": string,\n"
-            "  \"requirements\": [string],\n"
-            "  \"benefits\": [string],\n"
-            "  \"posted_at\": string,\n"
-            "  \"applications_count\": string\n"
+            "  \"employment_type\": \"Full-time\", \"Part-time\", etc,\n"
+            "  \"seniority\": \"Junior\", \"Mid\", \"Senior\", or null,\n"
+            "  \"salary\": \"salary info or null\",\n"
+            "  \"description\": \"A detailed prose description of the role and the company's goals.\",\n"
+            "  \"requirements\": \"A detailed prose list of technical skills, tools (like HTML, CSS, JavaScript, WordPress), and required experience.\",\n"
+            "  \"benefits\": [\"perk 1\", \"perk 2\"],\n"
+            "  \"posted_at\": \"posting date\",\n"
+            "  \"applications_count\": \"number of applicants\"\n"
             "}\n\n"
             "### SOURCE TEXT\n"
-            "<text>\n"
-            f"{clean_text}\n"
-            "</text>\n\n"
-            "### INSTRUCTIONS\n"
-            "- Return ONLY valid JSON.\n"
-            "- Use null for missing strings.\n"
-            "- Use [] for missing lists.\n"
-            "- No thinking process.\n\n"
-            "JSON:"
+            f"{clean_text}\n\n"
+            "JSON RESPONSE:"
         )
 
         async with httpx.AsyncClient() as client:
