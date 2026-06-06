@@ -1,7 +1,5 @@
 requests
 beautifulsoup4
-markdown
-weasyprint
 flake8
 fastapi
 uvicorn

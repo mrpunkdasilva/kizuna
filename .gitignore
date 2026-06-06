@@ -41,11 +41,3 @@ docker-compose.override.yml
 .dockerignore
 !docker-compose.yml # Do not ignore the main docker-compose file
 
-# Project Generated Files
-/output/*
-!/output/README.md
-!/output/CURRICULO_GUSTAVO_HENRIQUE_DE_JESUS_DA_SILVA_WEDEVUP.pdf
-/curriculums/*
-!/curriculums/README.md
-!/curriculums/cv.md
-!/curriculums/curriculo_wedevup.md

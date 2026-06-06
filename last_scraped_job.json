@@ -1,19 +1,59 @@
 {
-  "title": "Senior Web Developer at Firegang Dental Marketing",
+  "title": "Junior Web Developer Firegang Dental Marketing",
   "company": "Firegang Dental Marketing",
-  "location": "United States",
+  "location": "Ver descrição",
   "work_style": "Remote",
-  "employment_type": "Full-time",
-  "seniority": "Senior",
-  "salary": "",
-  "description": "The role of Senior Web Developer at Firegang Dental Marketing involves overseeing and developing high-quality web applications for our clients. We are looking for a dedicated and experienced developer who can manage multiple projects, ensure the delivery of innovative solutions, and contribute to the overall success of our digital marketing efforts. This is a remote position with opportunities for professional growth and collaboration with talented teams across the organization. The ideal candidate should have strong technical skills in front-end development, including HTML5, CSS3, JavaScript, and jQuery, as well as experience working with WordPress CMS. We are seeking someone who can work independently while maintaining close relationships with our clients and team members. This is a remote position available to candidates worldwide in the U.S. The role requires excellent communication skills, attention to detail, and the ability to work efficiently under tight deadlines. We offer competitive compensation, flexible working hours, and a supportive work environment. We are an equal opportunity employer committed to diversity and inclusion.",
-  "requirements": "Basic knowledge of front-end technologies including HTML5, CSS3, JavaScript, and jQuery; familiarity with WordPress CMS; experience managing multiple web applications; ability to work independently while maintaining close relationships with clients and team members; strong communication skills; attention to detail; proficiency in English. We are looking for a candidate who can deliver high-quality web applications that meet the highest standards of quality and functionality.",
+  "employment_type": "Full-Time",
+  "salary": "Ver descrição",
+  "description": "A dynamic opportunity to join the Junior Web Developer team at Firegang Dental Marketing, where you'll work remotely on a full-time basis. This role focuses on web development, with responsibilities including content updates, website maintenance, and client support. You'll collaborate with designers and contribute to creating visually appealing and functional websites.",
+  "requirements": [
+    {
+      "description": "Bachelor’s degree in Computer Science or related field."
+    },
+    {
+      "description": "Basic knowledge of front-end technologies (HTML5, CSS3, JavaScript, jQuery)."
+    },
+    {
+      "description": "Proficiency with WordPress CMS, including content management and plugin installation. Experience with debugging tools like Chrome DevTools."
+    }
+  ],
+  "bonus_points": [
+    "Familiarity with PHP and basic MySQL databases knowledge."
+  ],
+  "portfolio": "",
+  "exposure_to_uiUX_concepts": "",
+  "soft_skills": [
+    {
+      "description": "Problem-solving skills for identifying and resolving daily website issues."
+    },
+    {
+      "description": "Strong communication skills for collaborating with technical and non-technical stakeholders."
+    }
+  ],
+  "pros": [
+    "Proactive learning of new technologies. Ability to adapt to updates in tech environment."
+  ],
+  "cons": [
+    "No specific exposure to UI/UX design concepts. Familiarity with SEO best practices is mentioned but not explicitly listed."
+  ],
+  "ai_summary": "Ver descrição",
+  "interview_tips": [
+    "Informação deduzida da descrição"
+  ],
+  "ats_keywords": [
+    "Informação deduzida da descrição"
+  ],
+  "compatibility_score": "Ver descrição",
+  "company_values": [
+    "Informação deduzida da descrição"
+  ],
+  "seniority": "Ver descrição",
   "benefits": [
-    " flexible working hours, remote work option, competitive salary, professional development opportunities, collaborative environment, company culture",
-    "postings at least 3 months ago",
-    "email notifications when new jobs are posted",
-    "job type: Full-time",
-    "company size: unknown",
-    "salary range: unknown"
+    "Informação deduzida da descrição"
+  ],
+  "posted_at": "Ver descrição",
+  "applications_count": "Ver descrição",
+  "tech_stack": [
+    "Informação deduzida da descrição"
   ]
 }

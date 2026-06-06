@@ -1,0 +1,41 @@
+{
+  "title": "Título da vaga",
+  "company": "Não informado",
+  "location": "Não informado",
+  "work_style": "Remoto",
+  "employment_type": "Não informado",
+  "seniority": "Não informado",
+  "salary": "Não informado",
+  "description": "Não informado",
+  "requirements": [
+    "lista de requisitos técnicos"
+  ],
+  "benefits": [
+    " lista de benefícios"
+  ],
+  "posted_at": "Não informado",
+  "applications_count": "Não informado",
+  "tech_stack": [
+    "tecnologias utilizadas"
+  ],
+  "soft_skills": [
+    "habilidades comportamentais"
+  ],
+  "pros": [
+    "Não informado"
+  ],
+  "cons": [
+    "Não informado"
+  ],
+  "ai_summary": "Resumo executivo final",
+  "interview_tips": [
+    "Não informado"
+  ],
+  "ats_keywords": [
+    "Não informado"
+  ],
+  "compatibility_score": "Não informado",
+  "company_values": [
+    "Não informado"
+  ]
+}

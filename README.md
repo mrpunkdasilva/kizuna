@@ -121,6 +121,34 @@ Este projeto está em desenvolvimento contínuo.
 
 ## Estrutura do Projeto
 
+*   `api/`: Contém a aplicação Spring Boot principal (Backend).
+    *   `pom.xml`: Configurações Maven e dependências (incluindo Actuator e Micrometer).
+    *   `src/main/java/.../controller/`: Endpoints com logs e métricas customizadas.
+*   `client/`: Aplicação frontend em Vue.js.
+    *   `src/utils/logger.js`: Utilitário de logs estruturados para o frontend.
+*   `scrapper/`: Serviço Python FastAPI para web scraping.
+*   `prometheus.yml`: Configuração de coleta de métricas do Prometheus.
+*   `docker-compose.yml`: Orquestração de todos os serviços (App, IA, DB, Monitoramento).
+*   `data/`: JSONs com informações base para o currículo.
+*   `curriculums/`: Onde os arquivos `.md` adaptados são salvos.
+*   `output/`: Onde os PDFs finais são gerados.
+
+## Contato
+
+Para mais informações, entre em contato com [email](email) ou [dc](dc)
+erviços
+
+Quando terminar de usar, você pode parar e remover os contêineres:
+```bash
+docker compose down
+```
+
+## Desenvolvimento
+
+Este projeto está em desenvolvimento contínuo.
+
+## Estrutura do Projeto
+
 *   `backend/`: Contém a aplicação Python FastAPI para web scraping.
     *   `main.py`: Lógica da API FastAPI.
     *   `Dockerfile`: Instruções para construir a imagem Docker do scraper, incluindo Firefox e Geckodriver.

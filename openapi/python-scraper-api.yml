@@ -27,7 +27,7 @@ paths:
 
   /scrape-job/:
     post:
-      summary: Scrape job details from a given URL
+      summary: Scrape job details from a given URL using Selenium and Ollama
       operationId: scrapeJob
       requestBody:
         required: true
@@ -37,19 +37,11 @@ paths:
               $ref: '#/components/schemas/JobURL'
       responses:
         '200':
-          description: Job data successfully scraped
+          description: Job data successfully scraped and processed by AI
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    example: "received"
-                  url:
-                    type: string
-                    format: uri
-                    example: "https://www.linkedin.com/jobs/view/..."
+                $ref: '#/components/schemas/ScrapedJobData'
         '422':
           description: Validation Error
           content:
@@ -60,7 +52,7 @@ paths:
                   detail:
                     type: array
                     items:
-                      type: object # You might want to define a more detailed error schema here
+                      type: object
 
 components:
   schemas:
@@ -71,6 +63,83 @@ components:
           type: string
           format: uri
           description: The URL of the job vacancy to be scraped.
-          example: "https://www.linkedin.com/jobs/view/3807271927/?eBP=NotAllowedSpecialist&refId=k0p%2BTdO6DkR5j42cQ%2B3B9g%3D%3D&trackingId=02%2FrqfQy2V5zG1nJd3bMdg%3D%3D&trk=flagship3_job_discovery_jymbii"
+          example: "https://www.linkedin.com/jobs/view/..."
+        language:
+          type: string
+          description: Preferred language for the AI analysis.
+          default: "pt-br"
       required:
         - url
+
+    ScrapedJobData:
+      type: object
+      properties:
+        title:
+          type: string
+          example: "Software Engineer"
+        company:
+          type: string
+          example: "Tech Solutions Inc."
+        location:
+          type: string
+          example: "São Paulo, SP"
+        work_style:
+          type: string
+          example: "Remoto"
+        employment_type:
+          type: string
+          example: "CLT"
+        seniority:
+          type: string
+          example: "Senior"
+        salary:
+          type: string
+          example: "R$ 15.000 - R$ 20.000"
+        description:
+          type: string
+        requirements:
+          type: array
+          items:
+            type: string
+        benefits:
+          type: array
+          items:
+            type: string
+        tech_stack:
+          type: array
+          items:
+            type: string
+        soft_skills:
+          type: array
+          items:
+            type: string
+        posted_at:
+          type: string
+        applications_count:
+          type: string
+        pros:
+          type: array
+          items:
+            type: string
+        cons:
+          type: array
+          items:
+            type: string
+        interview_tips:
+          type: array
+          items:
+            type: string
+        ats_keywords:
+          type: array
+          items:
+            type: string
+        compatibility_score:
+          type: string
+          example: "85%"
+        company_values:
+          type: array
+          items:
+            type: string
+        ai_summary:
+          type: string
+

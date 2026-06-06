@@ -10,6 +10,19 @@ services:
     networks:
       - kizuna_network
 
+  # Serviço para baixar o DeepSeek R1 1.5B automaticamente
+  ollama-pull-model:
+    image: curlimages/curl:latest
+    container_name: ollama_pull_model
+    depends_on:
+      - ollama
+    networks:
+      - kizuna_network
+    entrypoint: /bin/sh
+    command: >
+      -c "sleep 5;
+      curl -X POST http://ollama:11434/api/pull -d '{\"name\": \"deepseek-r1:1.5b\"}'"
+
   python-scraper:
     build:
       context: ./scrapper
@@ -20,18 +33,16 @@ services:
       - ollama
     ports:
       - "8000:8000"
-    volumes:
-      - ./scrapper:/home/appuser/app
     environment:
-      OLLAMA_HOST: http://ollama:11434
-      OLLAMA_MODEL: deepseek-r1:1.5b
+      - OLLAMA_HOST=http://ollama:11434
+      - OLLAMA_MODEL=deepseek-r1:1.5b
     restart: always
     networks:
       - kizuna_network
 
   springboot-app:
     build:
-      context: ./springboot-app
+      context: ./api
       dockerfile: Dockerfile
     image: springboot-app
     container_name: springboot_app
@@ -41,12 +52,24 @@ services:
       - mongo
     ports:
       - "8080:8080"
-    volumes:
-      - ./springboot-app:/app
     environment:
-      OLLAMA_HOST: http://ollama:11434
-      PYTHON_SCRAPER_HOST: http://python_scraper:8000
-      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/kizunacopilot
+      - OLLAMA_HOST=http://ollama:11434
+      - PYTHON_SCRAPER_HOST=http://python-scraper:8000
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo:27017/kizunacopilot
+    restart: always
+    networks:
+      - kizuna_network
+
+  vue-client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    image: vue-client
+    container_name: vue_client
+    ports:
+      - "3000:80"
+    depends_on:
+      - springboot-app
     restart: always
     networks:
       - kizuna_network
@@ -54,10 +77,32 @@ services:
   mongo:
     image: mongo:latest
     container_name: mongo
-    ports:
-      - "27017:27017"
+    # ports:
+    #   - "27017:27017"
     volumes:
       - mongo_data:/data/db
+    restart: always
+    networks:
+      - kizuna_network
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    restart: always
+    networks:
+      - kizuna_network
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
     restart: always
     networks:
       - kizuna_network
