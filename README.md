@@ -1,169 +1,111 @@
 <p align="center">
-<img src="./.vsc/kizuna.svg" alt="Kizuna Iporá" width="200px">
+<img src="./.vsc/kizuna.svg" alt="Kizuna Copilot" width="200px">
 </p>
 
 # Kizuna Copilot
 
-> *A mascote e guia do projeto é a **Kizuna Iporá**.*
+> *A mascote e guia do meu projeto pessoal é a **Kizuna Iporá**.*
 
 ## Visão Geral
 
-O **Kizuna Copilot** é uma solução para otimizar a criação de currículos personalizados, utilizando uma arquitetura de microsserviços. Ele é composto por um serviço de web scraping em Python, um backend principal em Spring Boot para orquestração e interação com modelos de linguagem de grande escala (LLMs) via Ollama.
+O **Kizuna Copilot** é uma solução completa para otimizar a criação de currículos personalizados, utilizando uma arquitetura moderna de microsserviços. O sistema automatiza a extração de dados de vagas de emprego, utiliza Inteligência Artificial para adaptar o conteúdo do currículo e gera versões finais em PDF, tudo isso com monitoramento em tempo real.
 
-## Arquitetura de Microsserviços
+## Arquitetura do Sistema
 
-O projeto é dividido nos seguintes serviços principais:
+O projeto é orquestrado via Docker e dividido nos seguintes serviços:
 
-1.  **Ollama (`ollama`):**
-    *   Responsável por hospedar e gerenciar os modelos de linguagem de grande escala (LLMs) para processamento e geração de conteúdo.
+1.  **Frontend (`vue-client`):**
+    *   Interface web construída com **Vue.js** e **Vite**.
+    *   Permite interagir com o sistema de forma amigável.
+    *   Porta exposta: `3000`.
 
-2.  **Python Scraper (`python-scraper`):**
-    *   Um serviço FastAPI em Python dedicado à extração de informações de vagas de emprego de plataformas como o LinkedIn. Agora utiliza **Selenium para web scraping**, permitindo a extração de conteúdo dinâmico.
-    *   Expõe um endpoint REST para receber URLs de vagas e retornar os dados extraídos.
-    *   Porta exposta: `8000`.
-    *   Conecta-se ao **Selenium Hub** (porta `4444`) para orquestrar a automação do navegador.
-
-3.  **Selenium Grid (`selenium-hub` e `firefox-node`):**
-    *   Serviços do Docker que fornecem uma infraestrutura para rodar testes de Selenium em navegadores remotos. O `selenium-hub` coordena os nós (`firefox-node`), que rodam instâncias do navegador Firefox.
-    *   Portas expostas do Hub: `4444` (API de Selenium), `4442` (eventos), `4443` (eventos).
-
-3.  **Spring Boot Backend (`springboot-app`):**
-    *   O backend principal da aplicação, construído com Spring Boot em Java.
-    *   Será responsável por orquestrar as chamadas ao serviço Python Scraper, interagir com o Ollama para adaptar o conteúdo e expor a API final para o cliente.
+2.  **Backend Principal (`springboot-app`):**
+    *   O coração do sistema, desenvolvido em **Java com Spring Boot**.
+    *   Gerencia a persistência de dados no MongoDB, orquestra as chamadas de IA e gera os PDFs.
     *   Porta exposta: `8080`.
 
-## Funcionalidades (Planejadas)
+3.  **Python Scraper (`python-scraper`):**
+    *   Serviço especializado em extração de dados (Web Scraping) construído com **FastAPI**.
+    *   Focado em coletar descrições de vagas dinamicamente.
+    *   Porta exposta: `8000`.
 
-*   **Web Scraping Inteligente:** Extração de informações relevantes de links de vagas de emprego (implementado no `python-scraper`).
-*   **Geração de Conteúdo com LLM:** Utilização de inteligência artificial para adaptar e otimizar o texto do seu currículo com base nos requisitos da vaga (orquestrado pelo `springboot-app` com `ollama`).
-*   **API de Orquestração:** Exposição de endpoints para gerenciar o processo de adaptação de currículos (no `springboot-app`).
-*   **Formato Markdown e PDF:** Geração final de currículos em Markdown e conversão para PDF.
+4.  **Inteligência Artificial (`ollama`):**
+    *   Hospeda o modelo **DeepSeek R1 (1.5B)** localmente.
+    *   Utilizado para analisar vagas e reescrever seções do currículo.
+    *   Um serviço auxiliar (`ollama-pull-model`) garante que o modelo seja baixado automaticamente ao subir o sistema.
+
+5.  **Banco de Dados (`mongo`):**
+    *   Utiliza **MongoDB** para armazenar as informações de currículos e vagas processadas.
+
+6.  **Observabilidade (`prometheus` & `grafana`):**
+    *   **Prometheus:** Coleta métricas de desempenho dos serviços. (Porta `9090`)
+    *   **Grafana:** Dashboard visual para monitorar a saúde do sistema. (Porta `3001`)
+
+## Funcionalidades
+
+*   **Extração Inteligente:** Captura detalhes de vagas diretamente de links do LinkedIn.
+*   **Adaptação com IA:** O modelo DeepSeek ajusta seu resumo e experiências para dar "match" com a vaga.
+*   **Gestão de Dados:** Armazena suas experiências, projetos e habilidades de forma estruturada.
+*   **Geração de PDF:** Exporta o currículo finalizado e otimizado em um formato profissional.
+*   **Monitoramento:** Acompanhe o consumo de recursos e requisições via Dashboards.
 
 ## Pré-requisitos
 
-Certifique-se de ter o Docker e o Docker Compose (com a nova sintaxe `docker compose`) instalados em seu sistema. O arquivo `docker-compose.yml` foi atualizado e não requer mais o atributo `version` no cabeçalho.
-Para o funcionamento adequado do web scraping, o **Selenium Grid** é utilizado, o que requer recursos adicionais de CPU/RAM para os contêineres do navegador.
+*   [Docker](https://docs.docker.com/get-docker/)
+*   [Docker Compose](https://docs.docker.com/compose/install/)
 
-## Como Usar
+## Como Executar
 
-Para iniciar e interagir com o Kizuna Copilot, siga os passos abaixo:
+É super simples! Com um único comando você sobe todo o ecossistema:
 
-### 1. Iniciar os Serviços
+### 1. Subir o Sistema
 
-No diretório raiz do projeto, execute o comando para construir as imagens e iniciar todos os serviços em segundo plano:
-
-```bash
-docker compose up --build -d
-```
-
-Este comando irá:
-*   Baixar a imagem do Ollama.
-*   Construir a imagem do `python-scraper` (FastAPI).
-*   Construir a imagem do `springboot-app` (Spring Boot), instalando OpenJDK e Maven.
-*   **Baixar e iniciar os serviços do Selenium Grid (`selenium-hub` e `firefox-node`)**.
-*   Iniciar todos os contêineres.
-
-### 2. Baixar o Modelo LLM (Ollama)
-
-Após os contêineres estarem rodando, baixe o modelo `deepseek-llm:7b` para o Ollama. Este modelo será usado para a geração de conteúdo. Este passo é essencial para a funcionalidade de IA.
+No diretório raiz, execute:
 
 ```bash
-docker exec ollama ollama pull deepseek-llm:7b
+docker compose up -d
 ```
-Aguarde o download ser concluído.
 
-### 3. Verificar o Status dos Serviços
+Isso vai:
+1.  Iniciar o banco de dados e as ferramentas de monitoramento.
+2.  Subir o Ollama e baixar o modelo DeepSeek R1 (pode demorar um pouco na primeira vez).
+3.  Compilar e rodar a API Spring Boot e o Scraper Python.
+4.  Lançar o Frontend Vue.js.
 
-Você pode verificar o status dos contêineres com:
+### 2. Acessar os Serviços
+
+*   **Frontend:** [http://localhost:3000](http://localhost:3000)
+*   **API Backend:** [http://localhost:8080](http://localhost:8080)
+*   **Scraper API:** [http://localhost:8000](http://localhost:8000)
+*   **Grafana:** [http://localhost:3001](http://localhost:3001) (Usuário: `admin` / Senha: `admin`)
+
+### 3. Verificar Saúde do Sistema
 
 ```bash
 docker compose ps
 ```
 
-### 4. Testar os Endpoints Básicos
+## Estrutura de Pastas
 
-*   **Python Scraper (FastAPI):**
-    ```bash
-    curl http://localhost:8000/
-    ```
-    Saída esperada: `{"message":"Kizuna Copilot API está no ar!"}`
-
-*   **Spring Boot Backend:**
-    ```bash
-    curl http://localhost:8080/
-    ```
-    Saída esperada (um erro 404, pois ainda não há endpoints definidos além do padrão): `{"timestamp":"...","status":404,"error":"Not Found","path":"/"}`
-
-### 5. Executar Testes
-
-#### Testes Python (Scraper)
-Para executar os testes unitários do serviço Python Scraper (FastAPI), use o seguinte comando dentro do contêiner:
-```bash
-docker compose exec python-scraper pytest test_main.py
-```
-
-#### Testes Spring Boot
-Para executar os testes unitários da aplicação Spring Boot, use o seguinte comando dentro do contêiner:
-```bash
-docker compose exec springboot-app mvn test
-```
-
-### 6. Parar os Serviços
-
-Quando terminar de usar, você pode parar e remover os contêineres:
-```bash
-docker compose down
-```
-
-## Desenvolvimento
-
-Este projeto está em desenvolvimento contínuo.
-
-## Estrutura do Projeto
-
-*   `api/`: Contém a aplicação Spring Boot principal (Backend).
-    *   `pom.xml`: Configurações Maven e dependências (incluindo Actuator e Micrometer).
-    *   `src/main/java/.../controller/`: Endpoints com logs e métricas customizadas.
-*   `client/`: Aplicação frontend em Vue.js.
-    *   `src/utils/logger.js`: Utilitário de logs estruturados para o frontend.
-*   `scrapper/`: Serviço Python FastAPI para web scraping.
-*   `prometheus.yml`: Configuração de coleta de métricas do Prometheus.
-*   `docker-compose.yml`: Orquestração de todos os serviços (App, IA, DB, Monitoramento).
-*   `data/`: JSONs com informações base para o currículo.
-*   `curriculums/`: Onde os arquivos `.md` adaptados são salvos.
+*   `api/`: Código fonte do Backend Java (Spring Boot).
+*   `client/`: Código fonte do Frontend (Vue.js).
+*   `scrapper/`: Script de scraping em Python (FastAPI).
+*   `data/`: Arquivos JSON base com suas informações profissionais.
+*   `curriculums/`: Onde os currículos adaptados (`.md`) são armazenados.
 *   `output/`: Onde os PDFs finais são gerados.
+*   `kizuna-kokoro/`: Prompts e "skills" da IA para o processo de otimização.
 
-## Contato
+## Desenvolvimento e Testes
 
-Para mais informações, entre em contato com [email](email) ou [dc](dc)
-erviços
-
-Quando terminar de usar, você pode parar e remover os contêineres:
+### Executar Testes (Backend)
 ```bash
-docker compose down
+docker exec springboot_app mvn test
 ```
 
-## Desenvolvimento
+### Executar Testes (Scraper)
+```bash
+docker exec python_scraper pytest
+```
 
-Este projeto está em desenvolvimento contínuo.
-
-## Estrutura do Projeto
-
-*   `backend/`: Contém a aplicação Python FastAPI para web scraping.
-    *   `main.py`: Lógica da API FastAPI.
-    *   `Dockerfile`: Instruções para construir a imagem Docker do scraper, incluindo Firefox e Geckodriver.
-    *   `requirements.txt`: Dependências Python, incluindo `selenium`, `pytest` e `pytest-asyncio`.
-    *   `test_main.py`: Testes unitários para a API do scraper.
-*   `springboot-app/`: Contém a aplicação Spring Boot principal.
-    *   `pom.xml`: Configurações Maven e dependências Java.
-    *   `src/`: Código fonte Java e recursos.
-    *   `Dockerfile`: Instruções para construir a imagem Docker do backend.
-    *   `src/test/java/com/mrpunkdasilva/kizunacopilot/KizunaCopilotApplicationTests.java`: Testes unitários para a aplicação Spring Boot.
-*   `docker-compose.yml`: Arquivo de orquestração do Docker Compose para todos os serviços, incluindo Ollama, Python Scraper, Spring Boot Backend, Selenium Hub e Firefox Node.
-*   `data/`: Diretório para dados de entrada (JSONs de currículos, etc.).
-*   `curriculums/`: Diretório para os currículos gerados em Markdown.
-*   `output/`: Diretório para os currículos gerados em PDF.
-
-## Contato
-
-Para mais informações, entre em contato com [email](email) ou [dc](dc)
+---
+*Este é um projeto pessoal em constante evolução. Sinta-se à vontade para explorar e aprender com a estrutura!*
