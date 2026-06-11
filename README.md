@@ -75,8 +75,10 @@ Isso vai:
 ### 2. Acessar os Serviços
 
 *   **Frontend:** [http://localhost:3000](http://localhost:3000)
-*   **API Backend:** [http://localhost:8080](http://localhost:8080)
-*   **Scraper API:** [http://localhost:8000](http://localhost:8000)
+*   **API Backend (Spring Boot):** [http://localhost:8080](http://localhost:8080)
+    *   **Swagger UI:** [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+*   **Scraper API (FastAPI):** [http://localhost:8000](http://localhost:8000)
+    *   **Swagger UI:** [http://localhost:8000/docs](http://localhost:8000/docs)
 *   **Grafana:** [http://localhost:3001](http://localhost:3001) (Usuário: `admin` / Senha: `admin`)
 
 ### 3. Verificar Saúde do Sistema
