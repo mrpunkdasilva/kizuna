@@ -53,23 +53,18 @@ public class ResumeService {
     }
 
     private String buildTailorPrompt(Map<String, Object> candidateData, JobPosting job) {
-        return "### ROLE\n" +
-                "Atue como Kizuna Iporá, uma estrategista de currículos experiente.\n\n" +
-                "### TASK\n" +
-                "Crie um currículo em Markdown adaptado para a vaga abaixo, usando os dados do candidato fornecidos.\n\n" +
-                "### CANDIDATE DATA (JSON)\n" +
-                candidateData.toString() + "\n\n" +
-                "### JOB DATA (JSON)\n" +
-                job.toString() + "\n\n" +
-                "### INSTRUCTIONS\n" +
-                "1. O currículo deve ser em Markdown.\n" +
-                "2. Destaque as tecnologias e experiências que batem com a vaga.\n" +
-                "3. Use um tom profissional e direto.\n" +
-                "4. Estrutura sugerida: Nome/Contato, Resumo, Experiência, Projetos, Skills, Educação.\n" +
-                "5. NÃO invente informações que não estão no perfil do candidato.\n" +
-                "6. Responda APENAS com o conteúdo do Markdown.\n\n" +
-                "### OUTPUT\n" +
-                "Markdown Content:";
+        try {
+            Path promptPath = Paths.get("kizuna-kokoro", "prompts", "tailor-resume.md");
+            String template = Files.readString(promptPath);
+            
+            return template
+                    .replace("[CANDIDATE_DATA]", candidateData.toString())
+                    .replace("[JOB_DATA]", job.toString());
+        } catch (Exception e) {
+            log.error("Error reading prompt template, falling back to basic prompt", e);
+            return "Atue como Kizuna Iporá. Crie um currículo em Markdown para a vaga: " + job.getTitle() + 
+                   " usando os dados: " + candidateData.toString();
+        }
     }
 
     private Mono<String> saveAndExport(String markdown, JobPosting job) {

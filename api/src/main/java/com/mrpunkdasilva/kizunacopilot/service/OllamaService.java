@@ -43,7 +43,7 @@ public class OllamaService {
                 .bodyValue(requestBody)
                 .retrieve()
                 .bodyToMono(OllamaResponse.class)
-                .timeout(Duration.ofMinutes(5))
+                .timeout(Duration.ofMinutes(10))
                 .map(response -> {
                     String text = response.getResponse();
                     // Remove think tags if present (DeepSeek specific)

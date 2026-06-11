@@ -3,6 +3,7 @@ import subprocess
 import json
 import httpx
 import re
+import traceback
 from bs4 import BeautifulSoup
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, HttpUrl
@@ -52,17 +53,20 @@ async def scrape_job(job_url: JobURL):
 
     try:
         user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        print(f"Iniciando download da vaga: {job_url.url}")
         cmd = [
-            "wget", "-qO-", "--no-check-certificate", "--timeout=20", "--tries=2",
+            "wget", "-qO-", "--no-check-certificate", "--timeout=60", "--tries=3",
             f"--user-agent={user_agent}", str(job_url.url)
         ]
         
         result = subprocess.run(cmd, capture_output=True, text=True)
         
         if result.returncode != 0:
+            print(f"Erro no wget: {result.stderr}")
             raise HTTPException(status_code=500, detail="Erro ao baixar a página.")
 
         raw_content = result.stdout
+        print(f"Página baixada com sucesso ({len(raw_content)} bytes). Processando conteúdo...")
         
         # Se o conteúdo for um JSON (comum em dumps de debug), extraímos o HTML dele
         try:
@@ -120,22 +124,29 @@ async def scrape_job(job_url: JobURL):
         )
 
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Erro interno: {str(e)}")
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Erro no processamento da página: {str(e)}")
 
+    print(f"Enviando para o Ollama (modelo: {model})...")
     async with httpx.AsyncClient() as client:
-        response = await client.post(
-            f"{ollama_host}/api/generate",
-            json={
-                "model": model,
-                "prompt": prompt,
-                "stream": False,
-                "options": {
-                    "num_ctx": 12000, # Aumentado para suportar o contexto maior
-                    "temperature": 0.2
-                }
-            },
-            timeout=300
-        )
+        try:
+            response = await client.post(
+                f"{ollama_host}/api/generate",
+                json={
+                    "model": model,
+                    "prompt": prompt,
+                    "stream": False,
+                    "options": {
+                        "num_ctx": 12000, 
+                        "temperature": 0.2
+                    }
+                },
+                timeout=600 # Aumentado para 10 minutos
+            )
+            print("Resposta do Ollama recebida!")
+        except Exception as e:
+            print(f"Erro na chamada ao Ollama: {e}")
+            raise HTTPException(status_code=500, detail=f"Erro no Ollama: {str(e)}")
 
         if response.status_code != 200:
             raise HTTPException(status_code=500, detail="Erro no Ollama.")
