@@ -52,6 +52,9 @@ services:
       - mongo
     ports:
       - "8080:8080"
+    volumes:
+      - ./curriculums:/app/curriculums
+      - ./output:/app/output
     environment:
       - OLLAMA_HOST=http://ollama:11434
       - PYTHON_SCRAPER_HOST=http://python-scraper:8000
@@ -76,7 +79,7 @@ services:
 
   mongo:
     image: mongo:latest
-    container_name: mongo
+    container_name: mongo_new
     # ports:
     #   - "27017:27017"
     volumes:

@@ -64,6 +64,17 @@
               <li v-for="tip in result.interview_tips" :key="tip">{{ tip }}</li>
             </ul>
           </div>
+
+          <div class="action-footer">
+            <button @click="tailorResume" :disabled="tailoring || pdfFile" class="btn-tailor">
+              <span v-if="tailoring">Adaptando Currículo...</span>
+              <span v-else-if="pdfFile">Currículo Adaptado!</span>
+              <span v-else>Adaptar Meu Currículo para esta Vaga</span>
+            </button>
+            <a v-if="pdfFile" :href="'http://localhost:8080/api/resume/download/' + pdfFile" class="btn-download" target="_blank">
+              Baixar PDF
+            </a>
+          </div>
         </div>
       </transition>
     </main>
@@ -77,8 +88,10 @@ import { logger } from './utils/logger'
 
 const url = ref('')
 const loading = ref(false)
+const tailoring = ref(false)
 const result = ref(null)
 const error = ref(null)
+const pdfFile = ref(null)
 
 const scrapeJob = async () => {
   if (!url.value) return
@@ -86,6 +99,7 @@ const scrapeJob = async () => {
   loading.value = true
   result.value = null
   error.value = null
+  pdfFile.value = null
 
   logger.info('SCRAPE_START', { url: url.value })
 
@@ -102,9 +116,59 @@ const scrapeJob = async () => {
     loading.value = false
   }
 }
+
+const tailorResume = async () => {
+  if (!result.value || !result.value.id) return
+
+  tailoring.value = true
+  logger.info('TAILOR_START', { jobId: result.value.id })
+
+  try {
+    const response = await axios.post(`http://localhost:8080/api/resume/tailor/${result.value.id}`)
+    pdfFile.value = response.data
+    logger.info('TAILOR_SUCCESS', { file: pdfFile.value })
+  } catch (err) {
+    logger.error('TAILOR_FAILURE', { jobId: result.value.id, error: err.message })
+    error.value = 'Houve um erro ao adaptar seu currículo. Tente novamente em instantes.'
+  } finally {
+    tailoring.value = false
+  }
+}
 </script>
 
 <style scoped>
+/* ... (previous styles) ... */
+
+.action-footer {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.btn-tailor {
+  background: var(--primary);
+  color: white;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+}
+
+.btn-download {
+  background: var(--secondary);
+  color: black;
+  text-decoration: none;
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s;
+}
+
+.btn-download:hover {
+  transform: scale(1.05);
+}
+
 .container {
   max-width: 900px;
   margin: 0 auto;
