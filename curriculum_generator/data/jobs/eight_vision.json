@@ -1,0 +1,32 @@
+{
+  "job_slug": "eight_vision",
+  "company": "Eight Vision",
+  "position": "Desenvolvedor(a) Front-end Júnior",
+  "summary": "Desenvolvedor Front-end com sólida base em HTML5, CSS3 e JavaScript (avançado) e TypeScript (intermediário), em transição de Fullstack para foco exclusivo em Front-end. Experiência prática com React.js e Next.js (avançado), Angular (intermediário) e Vue.js (básico), além de ecossistema moderno: Redux, React Router, TanStack Query, Tailwind CSS, Vite, CSS Modules. Vivência real em consumo de APIs REST/GraphQL, Firebase (Auth, Realtime Database, Firestore), WebSockets (Socket.IO) e componentização com foco em reutilização, acessibilidade (W3C) e responsividade (mobile-first). Domínio de Git/GitHub (avançado), CI/CD com GitHub Actions/Vercel, testes com Jest e metodologias ágeis. Atualmente atuo como System Analyst (foco Front-end) na Mutant, desenvolvendo interfaces com TypeScript, Redux e React. Busco oportunidade para crescer como Desenvolvedor Front-end Júnior na Eight Vision, contribuindo com interfaces de qualidade, vontade de aprender e evoluir junto ao time.",
+  "featured_projects": [
+    "cybernews",
+    "opala_filmes",
+    "doces_da_thay",
+    "blood_donation"
+  ],
+  "skills_priority": [
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Tailwind CSS",
+    "Firebase",
+    "Git"
+  ],
+  "ats_keywords": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "TypeScript",
+    "React",
+    "Next.js",
+    "Git",
+    "APIs",
+    "Responsividade",
+    "Componentização"
+  ]
+}

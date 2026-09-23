@@ -1,0 +1,132 @@
+%-------------------------
+% Currículo Single Page - PT-BR
+%-------------------------
+\documentclass[a4paper,9pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+
+
+% Cores
+\usepackage{xcolor}
+\definecolor{sectioncolor}{HTML}{2563eb}
+\definecolor{linkcolor}{HTML}{2563eb}
+
+% Layout
+\geometry{margin=1.5cm, top=1cm, bottom=1cm}
+\pagestyle{empty}
+\setlength{\parskip}{0pt}
+\setlength{\parindent}{0pt}
+\linespread{1.05}
+
+% Seções
+\titleformat{\section}{\normalsize\bfseries\color{sectioncolor}}{}{0pt}{}[\titlerule\vspace{1pt}]
+\titlespacing{\section}{0pt}{4pt}{1pt}
+
+% Listas com espaçamento
+\setlist[itemize]{leftmargin=*, topsep=2pt, itemsep=4pt, parsep=0pt, label=$\bullet$}
+
+% Links
+\hypersetup{hidelinks, colorlinks=true, urlcolor=linkcolor}
+
+% Comandos customizados
+\newcommand{\cabecalho}[8]{
+  \begin{center}
+    {\Large \textbf{#1}} \\[2pt]
+    #2 \quad \href{mailto:#3}{\underline{#3}} \quad #4 \\[2pt]
+    \href{https://#5}{\underline{LinkedIn}} \quad
+    \href{https://#6}{\underline{GitHub}} \quad
+    \href{https://#7}{\underline{TabNews}} \quad
+    \href{https://#8}{\underline{Dev.to}}
+  \end{center}
+  \vspace{4pt}
+}
+
+\newcommand{\experiencia}[4]{
+  \textbf{#1} \hfill #2 \\
+  \textit{#3} \hfill \textit{#4} \\[1pt]
+}
+
+\newcommand{\projeto}[3]{
+  \textbf{#2} \hfill #3 \\[1pt]
+}
+
+\newcommand{\formacao}[3]{
+  \textbf{#1} \hfill #2 \quad \textit{#3} \\[1pt]
+}
+
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}}
+
+%-------------------------
+\begin{document}
+
+% CABEÇALHO
+\cabecalho{[[ personal.name|e ]]}{[[ personal.location|e ]]}{[[ personal.email|e ]]}{[[ personal.phone|e ]]}{[[ personal.linkedin_clean ]]}{[[ personal.github_clean ]]}{[[ personal.tabnews_clean ]]}{[[ personal.devto_clean ]]}
+
+% RESUMO
+\section{Resumo Profissional}
+{\footnotesize\linespread{1.3}\selectfont [[ summary|e ]]}
+
+% EXPERIÊNCIA
+\section{Experiência Profissional}
+{% for exp in experiences %}
+  \par\vspace*{4pt}
+  \experiencia{[[ exp.title|e ]]}{[[ exp.period|e ]]}{[[ exp.company|e ]]}{[[ exp.location|e ]]}
+  \resumeItemListStart{}
+{% for bullet in exp.bullets %}
+    \item \small{[[ bullet|e ]]}
+    \vspace{2pt}
+{% endfor %}
+  \resumeItemListEnd{}
+  \vspace{5pt}
+{% endfor %}
+
+% PROJETOS
+{% if featured_projects %}
+\section{Projetos em Destaque}
+{% for project in featured_projects %}
+  \par\vspace*{4pt}
+  \projeto{[[ project.github_clean ]]}{[[ project.title|e ]]}{[[ project.tech_stack | join(", ") | e ]]}
+  \resumeItemListStart{}
+{% for highlight in project.highlights %}
+    \item \small{[[ highlight|e ]]}
+    \vspace{2pt}
+{% endfor %}
+  \resumeItemListEnd{}
+  \vspace{1pt}
+  \small{\href{https://[[ project.github_clean ]]}{\underline{GitHub}} \quad \href{https://[[ project.demo ]]}{\underline{Demo}}}
+  \vspace{4pt}
+{% endfor %}
+{% endif %}
+
+% FORMAÇÃO
+\section{Formação Acadêmica}
+{% for edu in education %}
+  \formacao{[[ edu.title|e ]]}{[[ edu.period|e ]]}{[[ edu.institution|e ]]}
+{% endfor %}
+
+% HABILIDADES
+\section{Habilidades Técnicas}
+\begin{itemize}
+{% for category, skills in skills.items() %}
+  \item \small\textbf{[[ category|e ]]}: [[ skills | join(", ") | e ]]
+{% endfor %}
+\end{itemize}
+\vspace{1pt}
+
+% IDIOMAS
+\section{Idiomas}
+\begin{itemize}
+{% for lang in languages %}
+  \item \small\textbf{[[ lang.language|e ]]}: [[ lang.level|e ]]
+{% endfor %}
+\end{itemize}
+
+\end{document}

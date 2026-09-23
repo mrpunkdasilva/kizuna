@@ -1,0 +1,271 @@
+%-------------------------
+% Currículo - Template LaTeX para Desenvolvedores (PT-BR)
+% Adaptado do Rezume (https://github.com/sb2nov/resume)
+%-------------------------
+
+%------------PACKAGES----------------
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{verbatim}
+\usepackage{titlesec}
+\usepackage{color}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tabularx}
+\usepackage{latexsym}
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage[portuguese]{babel}
+%-----------------------------------------
+
+%----------FONT OPTIONS-------------------
+\usepackage{lmodern}
+\urlstyle{same}
+%-----------------------------------------
+
+
+%----------MARGIN OPTIONS-----------------
+\pagestyle{fancy}
+\fancyhf{}
+
+\renewcommand{\headrulewidth}{0in}
+\renewcommand{\footrulewidth}{0in}
+
+\setlength{\tabcolsep}{0in}
+
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\topmargin}{-0.5in}
+
+\addtolength{\textwidth}{1.0in}
+\addtolength{\textheight}{1.0in}
+
+% Allow proper page breaking
+\raggedbottom
+\raggedright
+%------------------------------------------
+
+
+%--------SECTIONING COMMANDS---------
+\titleformat{\section}
+  {\scshape\large}{}
+    {0em}{\color{blue}}[\color{black}\titlerule\vspace{4pt}]
+%-------------------------------------
+
+
+%--------REDEFINITIONS----------------
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+%-------------------------------------
+
+
+%--------CUSTOM COMMANDS--------------
+\newcommand{\resumeItem}[1]{
+  \item\small{#1}
+}
+
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.2in, rightmargin=0.1in, label={$\bullet$}, nosep]}
+\newcommand{\resumeItemListEnd}{\end{itemize}}
+
+\newcommand{\resumeHeading}[4]{
+  \noindent\textbf{#1}\hfill#2\par
+  \textit{#3}\hfill\textit{#4}\par
+  \vspace{2pt}
+}
+
+\newcommand{\resumeProject}[4]{
+  \noindent\textbf{\href{https://#1}{#2}}\hfill#3\par
+  \textit{#4}\par
+  \vspace{2pt}
+}
+
+\newcommand{\resumeHeadingListStart}{
+  \begin{itemize}[leftmargin=0.15in, label={}]
+}
+\newcommand{\resumeHeadingListEnd}{\end{itemize}}
+%-------------------------------------------
+
+
+%__________________CURRICULO____________________
+\begin{document}
+
+%-----------DADOS DE CONTATO------------------
+\begin{center}
+  {\Huge \textbf{Gustavo Henrique de Jesus da Silva}} \\[4pt]
+  São Paulo, SP \quad 
+  \href{mailto:gustavo.henrique.jesus@gmail.com}{gustavo.henrique.jesus@gmail.com} \quad 
+  +55 (11) 97881-2276 \\[4pt]
+  \href{https://linkedin.com/in/gustavo-henrique-de-jesus}{LinkedIn} \quad
+  \href{https://github.com/mrpunkdasilva}{GitHub} \quad
+  \href{https://tabnews.com.br/mrpunkdasilva}{TabNews} \quad
+  \href{https://dev.to/mrpunkdasilva}{Dev.to}
+\end{center}
+\vspace{8pt}
+%--------------------------------------------
+
+
+%-----------RESUMO PROFISSIONAL--------------------------
+\section{Resumo Profissional}
+\small{
+  Desenvolvedor Front-end com sólida base em HTML5, CSS3 e JavaScript (avançado) e TypeScript (intermediário), em transição de Fullstack para foco exclusivo em Front-end. Experiência prática com React.js e Next.js (avançado), Angular (intermediário) e Vue.js (básico), além de ecossistema moderno: Redux, React Router, TanStack Query, Tailwind CSS, Vite, CSS Modules. Vivência real em consumo de APIs REST/GraphQL, Firebase (Auth, Realtime Database, Firestore), WebSockets (Socket.IO) e componentização com foco em reutilização, acessibilidade (W3C) e responsividade (mobile-first). Domínio de Git/GitHub (avançado), CI/CD com GitHub Actions/Vercel, testes com Jest e metodologias ágeis. Atualmente atuo como System Analyst (foco Front-end) na Mutant, desenvolvendo interfaces com TypeScript, Redux e React. Busco oportunidade para crescer como Desenvolvedor Front-end Júnior na Eight Vision, contribuindo com interfaces de qualidade, vontade de aprender e evoluir junto ao time.
+}
+%--------------------------------------------
+
+
+%--------------HABILIDADES TÉCNICAS------------------------
+\section{Habilidades Técnicas}
+\resumeHeadingListStart{}
+
+  \item \textbf{Frontend}: React (Avançado), Next.js (Avançado), Angular (Intermediário), Vue.js (Básico), TypeScript (Intermediário), JavaScript ES6+ (Avançado), HTML5 (Avançado), CSS3/SCSS (Avançado), Tailwind CSS (Intermediário), Redux (Intermediário), TanStack Query (Básico), React Router (Avançado), CSS Modules (Intermediário), Vite (Intermediário), Headless UI (Intermediário), Framer Motion (Intermediário), jQuery (Intermediário), Bootstrap (Intermediário), Nuxt.js (Básico), RxJS (Intermediário), Angular Material (Intermediário), Socket.IO (Intermediário), THREE.js (Básico), Web Speech API (Básico), IndexedDB (Básico), Service Workers (Básico), Acessibilidade W3C (Intermediário)
+
+  \item \textbf{Backend e APIs}: Node.js/Express (Avançado), Firebase Auth/Realtime/Firestore (Avançado), APIs REST (Avançado), GraphQL (Básico), JWT (Intermediário), PHP (Intermediário), Laravel (Intermediário), Java/Spring Boot (Básico), Python (Avançado)
+
+  \item \textbf{Bancos de Dados}: MongoDB (Avançado), PostgreSQL (Intermediário), MySQL (Intermediário), SQLite (Básico), Firebase Realtime Database (Avançado), Firestore (Avançado)
+
+  \item \textbf{DevOps e Ferramentas}: Git (Avançado), GitHub (Avançado), GitHub Actions (Intermediário), GitLab CI/CD (Intermediário), Docker (Intermediário), Vercel (Avançado), Vite (Intermediário), Webpack (Intermediário), NPM (Avançado), Jest (Intermediário), Figma (Intermediário), Jira (Intermediário), Linux (Intermediário), AWS (Básico), Kubernetes (Básico)
+
+  \item \textbf{Metodologias e Princípios}: Agile/Scrum (Avançado), SOLID, DRY, KISS, Design Responsivo/Mobile-First, Componentização, Testes Automatizados, Conventional Commits
+
+\resumeHeadingListEnd{}
+%--------------------------------------------
+
+
+%-----------EXPERIÊNCIA PROFISSIONAL-----------------------
+\section{Experiência Profissional}
+\resumeHeadingListStart{}
+
+  \resumeHeading{Analista de Sistemas (Foco Front-end)}{Out 2025 – Presente}{Mutant}{Remoto}
+  \resumeItemListStart{}
+
+    \resumeItem{Desenvolvimento e manutenção de aplicações web complexas e responsivas com React, TypeScript e Redux, garantindo fidelidade de design e consistência de estado global}
+
+    \resumeItem{Melhoria de performance de carregamento do frontend, otimização da experiência do usuário e entrega de soluções digitais escaláveis dentro dos prazos}
+
+    \resumeItem{Consumo de APIs REST, integração com serviços backend, code review e manutenção de pipelines CI/CD}
+
+  \resumeItemListEnd{}
+
+  \resumeHeading{Desenvolvedor Web Freelancer}{Abr 2022 – Set 2022}{Clínica Odontológica Cadmo SA}{São Paulo, SP}
+  \resumeItemListStart{}
+
+    \resumeItem{Planejamento, design e construção de sistema web full-stack de ponta a ponta com PHP, MySQL e JavaScript, liderando todo o ciclo de vida da aplicação}
+
+    \resumeItem{Entrega de sistema de gestão odontológica seguro, escalável e totalmente responsivo que digitalizou e otimizou as operações administrativas da clínica}
+
+  \resumeItemListEnd{}
+
+  \resumeHeading{Desenvolvedor Web Freelancer}{Nov 2023}{JVJ E-commerce}{São Paulo, SP}
+  \resumeItemListStart{}
+
+    \resumeItem{Desenvolvimento de protótipo funcional e homepage responsiva com identidade visual usando HTML, CSS, JavaScript, jQuery e Bootstrap em apenas 2 dias}
+
+    \resumeItem{Garantia de compatibilidade cross-browser e foco em usabilidade para apresentação final do projeto}
+
+  \resumeItemListEnd{}
+
+  \resumeHeading{Mentor Voluntário de Programação}{Jul 2025 – Set 2025}{Jala University}{Remoto}
+  \resumeItemListStart{}
+
+    \resumeItem{Condução de 34 horas de mentoria nos cursos de Programação 1, Programação 2 e Desenvolvimento de Software 1, abordando Java, algoritmos, estruturas de dados e fundamentos de engenharia de software}
+
+    \resumeItem{Criação de material didático interativo ("NetRunner: Java Mastery Guide") para apoiar a jornada de aprendizado dos estudantes}
+
+    \resumeItem{Fortalecimento do entendimento técnico dos mentorados e contribuição para seu crescimento acadêmico}
+
+  \resumeItemListEnd{}
+
+\resumeHeadingListEnd{}
+%---------------------------------------------
+
+
+%-----------FORMAÇÃO ACADÊMICA-------------------------
+\section{Formação Acadêmica}
+\resumeHeadingListStart{}
+
+  \resumeHeading{Bacharelado em Engenharia de Software}{Jul 2024 – Dez 2028 (Em andamento)}{Jala University}{}
+
+  \resumeHeading{Técnico em Desenvolvimento de Sistemas}{Fev 2022 – Set 2023}{ETEC Francisco Morato}{}
+
+  \resumeHeading{Ensino Médio com Qualificação Técnica em Informática para Internet}{2021 – 2023}{ETEC Francisco Morato}{}
+
+  \resumeHeading{Programa de Intercâmbio - Imersão em Inglês (60h)}{Dez 2022 – Fev 2023}{CES Dublin, Irlanda}{}
+
+  \resumeHeading{Curso de Web Design (UI/UX, Design Gráfico, Front-end)}{Out 2019 – Out 2021}{Escola Modelo}{}
+
+\resumeHeadingListEnd{}
+%---------------------------------------------
+
+
+%-----------PROJETOS EM DESTAQUE--------------------------
+
+\section{Projetos em Destaque}
+\resumeHeadingListStart{}
+
+  \resumeProject{github.com/mrpunkdasilva/cybernews}{CyberNews - Cliente Cyberpunk do Hacker News}{Next.js, TypeScript, TailwindCSS, Framer Motion, IndexedDB, Web Speech API}{cynews.vercel.app}
+  \resumeItemListStart{}
+
+    \resumeItem{PWA offline-first com Service Workers e IndexedDB para cache inteligente e funcionamento 100\textbackslash{}% offline}
+
+    \resumeItem{Interface retro-futurista imersiva com animações de terminal via Framer Motion (efeito CRT, matrix rain, boot sequence), navegação estilo vim e comandos de voz via Web Speech API}
+
+    \resumeItem{Temas cyberpunk/retrowave customizáveis, animações de descriptografia de artigos, múltiplas fontes de dados, deploy otimizado no Vercel com edge functions}
+
+  \resumeItemListEnd{}
+  \vspace{4pt}
+
+  \resumeProject{github.com/Opaleiros-Foundation/Opala-Filmes}{Opala Filmes - Plataforma de Votação de Filmes em Tempo Real}{Next.js, React, Firebase Auth, Firebase Realtime Database, Firestore, TailwindCSS, Headless UI}{opala-filmes.vercel.app}
+  \resumeItemListStart{}
+
+    \resumeItem{Aplicação social full-stack para gerenciamento de watchlist, votação 5 estrelas e descoberta aleatória de filmes com sincronização em tempo real via Firebase Realtime Database e Firestore}
+
+    \resumeItem{Autenticação completa via Firebase Auth (email/senha, OAuth), proteção de rotas, gerenciamento de sessão e interface responsiva com tema escuro/claro}
+
+    \resumeItem{Arquitetura serverless com Next.js API Routes, algoritmos de recomendação aleatória, rastreamento de filmes assistidos, estatísticas do usuário e deploy contínuo no Vercel}
+
+  \resumeItemListEnd{}
+  \vspace{4pt}
+
+  \resumeProject{github.com/mrpunkdasilva/doces_da_thay}{Doces da Thay - Frontend de E-commerce}{jQuery, Bootstrap 5, HTML5, CSS3, JavaScript}{docinhos-da-thay.netlify.app}
+  \resumeItemListStart{}
+
+    \resumeItem{Frontend completo de e-commerce para doceria artesanal com abordagem mobile-first e design system consistente}
+
+    \resumeItem{Galeria de produtos responsiva com carrossel touch-friendly, navegação fluida entre categorias, fluxo de compra intuitivo com validação client-side, integração com WhatsApp Business para finalização de pedidos}
+
+    \resumeItem{Versionamento com Git/GitHub, código modular organizado por componentes, otimização de assets (imagens WebP, minificação), deploy contínuo no Netlify com formulários serverless}
+
+  \resumeItemListEnd{}
+  \vspace{4pt}
+
+  \resumeProject{github.com/mrpunkdasilva/Blood-Donation-Project}{Blood Donation Project - Plataforma de Doação de Sangue}{Next.js, TypeScript, TailwindCSS, Docker}{blood-donation-project.vercel.app}
+  \resumeItemListStart{}
+
+    \resumeItem{Desenvolvimento colaborativo do frontend com Next.js, TypeScript, TailwindCSS containerizado via Docker para ambiente de desenvolvimento consistente e CI/CD padronizado}
+
+    \resumeItem{Sistema de matching inteligente entre doadores e receptores baseado em geolocalização, tipo sanguíneo e urgência, com interface acessível seguindo diretrizes WCAG 2.1}
+
+    \resumeItem{Arquitetura de componentes reutilizáveis, gerenciamento de estado com React Context/Hooks, formulários validados com Zod, workflow em equipe via Git/GitHub (PRs, code review, issues), deploy no Vercel}
+
+  \resumeItemListEnd{}
+  \vspace{4pt}
+
+\resumeHeadingListEnd{}
+
+%--------------------------------------------
+
+
+%----------------IDIOMAS----------------------
+
+\section{Idiomas}
+\resumeHeadingListStart{}
+
+  \item \textbf{Português}: Nativo
+
+  \item \textbf{Inglês}: B2 (Intermediário)
+
+  \item \textbf{Espanhol}: Básico
+
+\resumeHeadingListEnd{}
+
+%--------------------------------------------
+
+\end{document}

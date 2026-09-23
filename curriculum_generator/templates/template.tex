@@ -1,0 +1,201 @@
+%-------------------------
+% Rezume - LaTeX Resume Template for Developers
+% Author : Nanu Panchamurthy
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+% Adapted for Jinja2 templating with curriculum data
+%-------------------------
+
+%------------PACKAGES----------------
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{verbatim}
+\usepackage{titlesec}
+\usepackage{color}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tabularx}
+\usepackage{latexsym}
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage[english]{babel}
+%-----------------------------------------
+
+%----------FONT OPTIONS-------------------
+\usepackage{lmodern}
+\urlstyle{same}
+%-----------------------------------------
+
+
+%----------MARGIN OPTIONS-----------------
+\pagestyle{fancy}
+\fancyhf{}
+
+\renewcommand{\headrulewidth}{0in}
+\renewcommand{\footrulewidth}{0in}
+
+\setlength{\tabcolsep}{0in}
+
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\topmargin}{-0.5in}
+
+\addtolength{\textwidth}{1.0in}
+\addtolength{\textheight}{1.0in}
+
+\raggedbottom{}
+\raggedright{}
+%------------------------------------------
+
+
+%--------SECTIONING COMMANDS---------
+\titleformat{\section}
+  {\scshape\large}{}
+    {0em}{\color{blue}}[\color{black}\titlerule\vspace{0pt}]
+%-------------------------------------
+
+
+%--------REDEFINITIONS----------------
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+%-------------------------------------
+
+
+%--------CUSTOM COMMANDS--------------
+\newcommand{\resumeItem}[1]{
+  \item\small{#1}
+}
+
+\newcommand{\resumeItemListStart}{\begin{itemize}[rightmargin=0.11in]}
+\newcommand{\resumeItemListEnd}{\end{itemize}}
+
+\newcommand{\resumeSectionType}[3]{
+  \item\begin{tabular*}{0.96\textwidth}[t]{
+    p{0.32\linewidth}p{0.02\linewidth}p{0.64\linewidth}
+  }
+    \textbf{#1} & #2 & #3
+  \end{tabular*}\vspace{-2pt}
+}
+
+\newcommand{\resumeTrioHeading}[3]{
+  \item\small{
+    \begin{tabular*}{0.96\textwidth}[t]{
+      l@{\extracolsep{\fill}}c@{\extracolsep{\fill}}r
+    }
+      \textbf{#1} & \textit{#2} & #3
+    \end{tabular*}
+  }
+}
+
+\newcommand{\resumeQuadHeading}[4]{
+  \item
+  \begin{tabular*}{0.96\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & #2 \\
+    \textit{\small#3} & \textit{\small #4} \\
+  \end{tabular*}
+}
+
+\newcommand{\resumeQuadHeadingChild}[2]{
+  \item
+  \begin{tabular*}{0.96\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{\small#1} & {\small#2} \\
+  \end{tabular*}
+}
+
+\newcommand{\resumeHeadingListStart}{
+  \begin{itemize}[leftmargin=0.15in, label={}]
+}
+\newcommand{\resumeHeadingListEnd}{\end{itemize}}
+%-------------------------------------------
+
+
+%__________________RESUME____________________
+\begin{document}
+
+%-----------CONTACT DETAILS------------------
+\begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}p{0.55\textwidth}@{}}
+  \textbf{\Huge [[ personal.name|e ]] \vspace{2pt}} &
+  \raggedleft Location: [[ personal.location|e ]] \\
+
+  \href{https://[[ personal.linkedin_clean ]]}{in} $|$
+  \href{https://[[ personal.github_clean ]]}{gh} $|$
+  \href{https://[[ personal.tabnews_clean ]]}{tn} $|$
+  \href{https://[[ personal.devto_clean ]]}{dev} &
+  \raggedleft Email: \href{mailto:[[ personal.email ]]}{[[ personal.email|e ]]} \quad
+  Mobile: [[ personal.phone|e ]] \\
+\end{tabular*}
+\vspace{4pt}
+%--------------------------------------------
+
+
+%-----------SUMMARY--------------------------
+\section{[[ job.position|e ]]}
+\small{
+  [[ summary|e ]]
+}
+%--------------------------------------------
+
+
+%--------------SKILLS------------------------
+\section{Technical Skills}
+  \resumeHeadingListStart{}
+{% for category, skills in skills.items() %}
+    \resumeSectionType{[[ category|e ]]}{:}{[[ skills | join(", ") | e ]]}
+{% endfor %}
+  \resumeHeadingListEnd{}
+%--------------------------------------------
+
+
+%-----------EXPERIENCE-----------------------
+\section{Experience}
+\resumeHeadingListStart{}
+{% for exp in experiences %}
+  \resumeQuadHeading{[[ exp.title|e ]]}{[[ exp.period|e ]]}{[[ exp.company|e ]]}{[[ exp.location|e ]]}
+    \resumeItemListStart{}
+{% for bullet in exp.bullets %}
+      \resumeItem{[[ bullet|e ]]}
+{% endfor %}
+    \resumeItemListEnd{}
+{% endfor %}
+\resumeHeadingListEnd{}
+%---------------------------------------------
+
+
+%-----------EDUCATION-------------------------
+\section{Education}
+  \resumeHeadingListStart{}
+{% for edu in education %}
+  \resumeQuadHeading{[[ edu.institution|e ]]}{[[ edu.title|e ]]}{[[ edu.period|e ]]}{}
+{% endfor %}
+  \resumeHeadingListEnd{}
+%---------------------------------------------
+
+
+%-----------PROJECTS--------------------------
+{% if featured_projects %}
+\section{Projects}
+  \resumeHeadingListStart{}
+{% for project in featured_projects %}
+    \resumeTrioHeading{\href{https://[[ project.github_clean ]]}{[[ project.title|e ]]}}{[[ project.tech_stack | join(", ") | e ]]}{\href{https://[[ project.github_clean ]]}{Source Code}}
+      \resumeItemListStart{}
+{% for highlight in project.highlights %}
+        \resumeItem{[[ highlight|e ]]}
+{% endfor %}
+      \resumeItemListEnd{}
+{% endfor %}
+  \resumeHeadingListEnd{}
+{% endif %}
+%--------------------------------------------
+
+
+%----------------OTHERS----------------------
+{% if languages %}
+\section{Languages}
+  \resumeItemListStart{}
+{% for lang in languages %}
+    \resumeItem{[[ lang.language|e ]]: [[ lang.level|e ]]}
+{% endfor %}
+  \resumeItemListEnd{}
+{% endif %}
+%--------------------------------------------
+
+\end{document}

@@ -1,0 +1,289 @@
+{
+  "personal": {
+    "name": "Gustavo Henrique de Jesus da Silva",
+    "phone": "+55 (11) 97881-2276",
+    "location": "São Paulo, SP",
+    "email": "gustavo.henrique.jesus@gmail.com",
+    "links": {
+      "linkedin": "linkedin.com/in/gustavo-henrique-de-jesus",
+      "github": "github.com/mrpunkdasilva",
+      "tabnews": "tabnews.com.br/mrpunkdasilva",
+      "devto": "dev.to/mrpunkdasilva"
+    }
+  },
+  "experiences": [
+    {
+      "title": "Analista de Sistemas (Foco Front-end)",
+      "company": "Mutant",
+      "period": "Out 2025 – Presente",
+      "location": "Remoto",
+      "bullets": [
+        "Desenvolvimento e manutenção de aplicações web complexas e responsivas com React, TypeScript e Redux, garantindo fidelidade de design e consistência de estado global",
+        "Melhoria de performance de carregamento do frontend, otimização da experiência do usuário e entrega de soluções digitais escaláveis dentro dos prazos",
+        "Consumo de APIs REST, integração com serviços backend, code review e manutenção de pipelines CI/CD"
+      ]
+    },
+    {
+      "title": "Desenvolvedor Web Freelancer",
+      "company": "Clínica Odontológica Cadmo SA",
+      "period": "Abr 2022 – Set 2022",
+      "location": "São Paulo, SP",
+      "bullets": [
+        "Planejamento, design e construção de sistema web full-stack de ponta a ponta com PHP, MySQL e JavaScript, liderando todo o ciclo de vida da aplicação",
+        "Entrega de sistema de gestão odontológica seguro, escalável e totalmente responsivo que digitalizou e otimizou as operações administrativas da clínica"
+      ]
+    },
+    {
+      "title": "Desenvolvedor Web Freelancer",
+      "company": "JVJ E-commerce",
+      "period": "Nov 2023",
+      "location": "São Paulo, SP",
+      "bullets": [
+        "Desenvolvimento de protótipo funcional e homepage responsiva com identidade visual usando HTML, CSS, JavaScript, jQuery e Bootstrap em apenas 2 dias",
+        "Garantia de compatibilidade cross-browser e foco em usabilidade para apresentação final do projeto"
+      ]
+    },
+    {
+      "title": "Mentor Voluntário de Programação",
+      "company": "Jala University",
+      "period": "Jul 2025 – Set 2025",
+      "location": "Remoto",
+      "bullets": [
+        "Condução de 34 horas de mentoria nos cursos de Programação 1, Programação 2 e Desenvolvimento de Software 1, abordando Java, algoritmos, estruturas de dados e fundamentos de engenharia de software",
+        "Criação de material didático interativo (\"NetRunner: Java Mastery Guide\") para apoiar a jornada de aprendizado dos estudantes",
+        "Fortalecimento do entendimento técnico dos mentorados e contribuição para seu crescimento acadêmico"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "title": "Bacharelado em Engenharia de Software",
+      "institution": "Jala University",
+      "period": "Jul 2024 – Dez 2028 (Em andamento)"
+    },
+    {
+      "title": "Técnico em Desenvolvimento de Sistemas",
+      "institution": "ETEC Francisco Morato",
+      "period": "Fev 2022 – Set 2023"
+    },
+    {
+      "title": "Ensino Médio com Qualificação Técnica em Informática para Internet",
+      "institution": "ETEC Francisco Morato",
+      "period": "2021 – 2023"
+    },
+    {
+      "title": "Programa de Intercâmbio - Imersão em Inglês (60h)",
+      "institution": "CES Dublin, Irlanda",
+      "period": "Dez 2022 – Fev 2023"
+    },
+    {
+      "title": "Curso de Web Design (UI/UX, Design Gráfico, Front-end)",
+      "institution": "Escola Modelo",
+      "period": "Out 2019 – Out 2021"
+    }
+  ],
+  "skills": {
+    "Frontend": [
+      "React",
+      "Next.js",
+      "Angular",
+      "Vue.js",
+      "TypeScript",
+      "JavaScript ES6+",
+      "HTML5",
+      "CSS3/SCSS",
+      "Tailwind CSS",
+      "Redux",
+      "TanStack Query",
+      "React Router",
+      "CSS Modules",
+      "Vite",
+      "Headless UI",
+      "Framer Motion",
+      "jQuery",
+      "Bootstrap",
+      "Nuxt.js",
+      "RxJS",
+      "Angular Material",
+      "Socket.IO",
+      "THREE.js",
+      "Web Speech API",
+      "IndexedDB",
+      "Service Workers",
+      "Acessibilidade W3C"
+    ],
+    "Backend e APIs": [
+      "Node.js/Express",
+      "Firebase Auth/Realtime/Firestore",
+      "APIs REST",
+      "GraphQL",
+      "JWT",
+      "PHP",
+      "Laravel",
+      "Java/Spring Boot",
+      "Python"
+    ],
+    "Bancos de Dados": [
+      "MongoDB",
+      "PostgreSQL",
+      "MySQL",
+      "SQLite",
+      "Firebase Realtime Database",
+      "Firestore"
+    ],
+    "DevOps e Ferramentas": [
+      "Git",
+      "GitHub",
+      "GitHub Actions",
+      "GitLab CI/CD",
+      "Docker",
+      "Vercel",
+      "Vite",
+      "Webpack",
+      "NPM",
+      "Jest",
+      "Figma",
+      "Jira",
+      "Linux",
+      "AWS",
+      "Kubernetes"
+    ],
+    "Metodologias e Princípios": [
+      "Agile/Scrum",
+      "SOLID",
+      "DRY",
+      "KISS",
+      "Design Responsivo/Mobile-First",
+      "Componentização",
+      "Testes Automatizados",
+      "Conventional Commits"
+    ]
+  },
+  "all_projects": {
+    "cybernews": {
+      "title": "CyberNews - Cliente Cyberpunk do Hacker News",
+      "tech_stack": ["Next.js", "TypeScript", "TailwindCSS", "Framer Motion", "IndexedDB", "Web Speech API"],
+      "highlights": [
+        "PWA offline-first com Service Workers e IndexedDB para cache inteligente e funcionamento 100% offline",
+        "Interface retro-futurista imersiva com animações de terminal via Framer Motion (efeito CRT, matrix rain, boot sequence), navegação estilo vim e comandos de voz via Web Speech API",
+        "Temas cyberpunk/retrowave customizáveis, animações de descriptografia de artigos, múltiplas fontes de dados, deploy otimizado no Vercel com edge functions"
+      ],
+      "github": "github.com/mrpunkdasilva/cybernews",
+      "demo": "cynews.vercel.app"
+    },
+    "opala_filmes": {
+      "title": "Opala Filmes - Plataforma de Votação de Filmes em Tempo Real",
+      "tech_stack": ["Next.js", "React", "Firebase Auth", "Firebase Realtime Database", "Firestore", "TailwindCSS", "Headless UI"],
+      "highlights": [
+        "Aplicação social full-stack para gerenciamento de watchlist, votação 5 estrelas e descoberta aleatória de filmes com sincronização em tempo real via Firebase Realtime Database e Firestore",
+        "Autenticação completa via Firebase Auth (email/senha, OAuth), proteção de rotas, gerenciamento de sessão e interface responsiva com tema escuro/claro",
+        "Arquitetura serverless com Next.js API Routes, algoritmos de recomendação aleatória, rastreamento de filmes assistidos, estatísticas do usuário e deploy contínuo no Vercel"
+      ],
+      "github": "github.com/Opaleiros-Foundation/Opala-Filmes",
+      "demo": "opala-filmes.vercel.app"
+    },
+    "doces_da_thay": {
+      "title": "Doces da Thay - Frontend de E-commerce",
+      "tech_stack": ["jQuery", "Bootstrap 5", "HTML5", "CSS3", "JavaScript"],
+      "highlights": [
+        "Frontend completo de e-commerce para doceria artesanal com abordagem mobile-first e design system consistente",
+        "Galeria de produtos responsiva com carrossel touch-friendly, navegação fluida entre categorias, fluxo de compra intuitivo com validação client-side, integração com WhatsApp Business para finalização de pedidos",
+        "Versionamento com Git/GitHub, código modular organizado por componentes, otimização de assets (imagens WebP, minificação), deploy contínuo no Netlify com formulários serverless"
+      ],
+      "github": "github.com/mrpunkdasilva/doces_da_thay",
+      "demo": "doces-da-thay.vercel.app"
+    },
+    "blood_donation": {
+      "title": "Blood Donation Project - Plataforma de Doação de Sangue",
+      "tech_stack": ["Next.js", "TypeScript", "TailwindCSS", "Docker"],
+      "highlights": [
+        "Desenvolvimento colaborativo do frontend com Next.js, TypeScript, TailwindCSS containerizado via Docker para ambiente de desenvolvimento consistente e CI/CD padronizado",
+        "Sistema de matching inteligente entre doadores e receptores baseado em geolocalização, tipo sanguíneo e urgência, com interface acessível seguindo diretrizes WCAG 2.1",
+        "Arquitetura de componentes reutilizáveis, gerenciamento de estado com React Context/Hooks, formulários validados com Zod, workflow em equipe via Git/GitHub (PRs, code review, issues), deploy no Vercel"
+      ],
+      "github": "github.com/mrpunkdasilva/Blood-Donation-Project",
+      "demo": "blood-donation-project.vercel.app"
+    },
+    "black_nib": {
+      "title": "Black Nib - Plataforma de Blog Moderna",
+      "tech_stack": ["React 18", "Vite 6", "TanStack Query 5", "React Router 7", "CSS Modules", "Node.js/Express", "MongoDB", "Docker", "JWT"],
+      "highlights": [
+        "Plataforma de blog full-stack com SSR, scroll infinito, temas escuro/claro, feed RSS e otimizações de SEO",
+        "Autenticação JWT, editor de markdown, containerização Docker, deploy no Vercel"
+      ],
+      "github": "github.com/mrpunkdasilva/blog-black-nilb",
+      "demo": "blog-black-nilb.vercel.app"
+    },
+    "focalpoint": {
+      "title": "FocalPoint - To-Do List (Teste Técnico)",
+      "tech_stack": ["Next.js App Router", "SCSS", "TypeScript"],
+      "highlights": [
+        "Entregue em 3 dias com fidelidade de design pixel-perfect, proporções e gradientes precisos",
+        "Arquitetura SCSS modular, componentes reutilizáveis, design responsivo e acessível, operações CRUD, deploy no Vercel"
+      ],
+      "github": "github.com/mrpunkdasilva/focalpoint-teste-tecnico",
+      "demo": "focalpoint-punk.vercel.app"
+    },
+    "bigbasket": {
+      "title": "Bigbasket E-commerce (Em Andamento)",
+      "tech_stack": ["Angular 19", "TypeScript", "RxJS", "Angular Material", "Signals"],
+      "highlights": [
+        "Arquitetura de e-commerce escalável com componentes standalone modernos do Angular, signals e injeção de dependência",
+        "Catálogo de produtos responsivo, carrinho de compras, autenticação de usuários, deploy contínuo no Vercel"
+      ],
+      "github": "github.com/mrpunkdasilva/bigbasket-ecommerce",
+      "demo": "bigbasket-eccomerce.vercel.app"
+    },
+    "vchat": {
+      "title": "VChat - Chat em Tempo Real com Vue.js",
+      "tech_stack": ["Vue.js", "Firebase Authentication", "Realtime Database"],
+      "highlights": [
+        "Chat em tempo real com autenticação segura, salas de chat, design responsivo, deploy no Netlify"
+      ],
+      "github": "github.com/mrpunkdasilva/vchat",
+      "demo": "appvchat.netlify.app"
+    },
+    "multiform": {
+      "title": "Multiform - Formulário Multi-step com React e TypeScript",
+      "tech_stack": ["React", "TypeScript"],
+      "highlights": [
+        "Formulário multi-step complexo com validação dinâmica, navegação fluida, persistência de estado, deploy no Vercel"
+      ],
+      "github": "github.com/mrpunkdasilva/multiform",
+      "demo": "multiform-react-red.vercel.app/step3"
+    },
+    "mental_health_db": {
+      "title": "Mental Health DB - Portal de Saúde Mental Acessível",
+      "tech_stack": ["HTML", "CSS3", "JavaScript"],
+      "highlights": [
+        "100% conformidade com WCAG/W3C: Text-to-Speech, modo alto contraste, tema escuro, tradução para Libras, legendas em vídeos",
+        "Design responsivo mobile-first, experiência inclusiva para usuários com diferentes necessidades"
+      ],
+      "github": "github.com/mrpunkdasilva/mental-health-db",
+      "demo": "mrpunkdasilva.github.io/mental-health-db"
+    },
+    "easy_bank": {
+      "title": "Easy Bank - Landing Page Mobile-First",
+      "tech_stack": ["HTML", "SCSS", "JavaScript"],
+      "highlights": [
+        "Landing page responsiva mobile-first com componentes interativos, otimização de performance, deploy no Netlify"
+      ],
+      "github": "github.com/mrpunkdasilva/fem-easybank",
+      "demo": "ieasybank.netlify.app"
+    }
+  },
+  "languages": [
+    {
+      "language": "Português",
+      "level": "Nativo"
+    },
+    {
+      "language": "Inglês",
+      "level": "B2 (Intermediário)"
+    },
+    {
+      "language": "Espanhol",
+      "level": "Básico"
+    }
+  ]
+}

@@ -1,0 +1,290 @@
+%-------------------------
+% Rezume - LaTeX Resume Template for Developers
+% Author : Nanu Panchamurthy
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+% Adapted for Jinja2 templating with curriculum data
+%-------------------------
+
+%------------PACKAGES----------------
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{verbatim}
+\usepackage{titlesec}
+\usepackage{color}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{tabularx}
+\usepackage{latexsym}
+\usepackage{marvosym}
+\usepackage{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage[english]{babel}
+%-----------------------------------------
+
+%----------FONT OPTIONS-------------------
+\usepackage{lmodern}
+\urlstyle{same}
+%-----------------------------------------
+
+
+%----------MARGIN OPTIONS-----------------
+\pagestyle{fancy}
+\fancyhf{}
+
+\renewcommand{\headrulewidth}{0in}
+\renewcommand{\footrulewidth}{0in}
+
+\setlength{\tabcolsep}{0in}
+
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\topmargin}{-0.5in}
+
+\addtolength{\textwidth}{1.0in}
+\addtolength{\textheight}{1.0in}
+
+\raggedbottom{}
+\raggedright{}
+%------------------------------------------
+
+
+%--------SECTIONING COMMANDS---------
+\titleformat{\section}
+  {\scshape\large}{}
+    {0em}{\color{blue}}[\color{black}\titlerule\vspace{0pt}]
+%-------------------------------------
+
+
+%--------REDEFINITIONS----------------
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+%-------------------------------------
+
+
+%--------CUSTOM COMMANDS--------------
+\newcommand{\resumeItem}[1]{
+  \item\small{#1}
+}
+
+\newcommand{\resumeItemListStart}{\begin{itemize}[rightmargin=0.11in]}
+\newcommand{\resumeItemListEnd}{\end{itemize}}
+
+\newcommand{\resumeSectionType}[3]{
+  \item\begin{tabular*}{0.96\textwidth}[t]{
+    p{0.15\linewidth}p{0.02\linewidth}p{0.81\linewidth}
+  }
+    \textbf{#1} & #2 & #3
+  \end{tabular*}\vspace{-2pt}
+}
+
+\newcommand{\resumeTrioHeading}[3]{
+  \item\small{
+    \begin{tabular*}{0.96\textwidth}[t]{
+      l@{\extracolsep{\fill}}c@{\extracolsep{\fill}}r
+    }
+      \textbf{#1} & \textit{#2} & #3
+    \end{tabular*}
+  }
+}
+
+\newcommand{\resumeQuadHeading}[4]{
+  \item
+  \begin{tabular*}{0.96\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & #2 \\
+    \textit{\small#3} & \textit{\small #4} \\
+  \end{tabular*}
+}
+
+\newcommand{\resumeQuadHeadingChild}[2]{
+  \item
+  \begin{tabular*}{0.96\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{\small#1} & {\small#2} \\
+  \end{tabular*}
+}
+
+\newcommand{\resumeHeadingListStart}{
+  \begin{itemize}[leftmargin=0.15in, label={}]
+}
+\newcommand{\resumeHeadingListEnd}{\end{itemize}}
+%-------------------------------------------
+
+
+%__________________RESUME____________________
+\begin{document}
+
+%-----------CONTACT DETAILS------------------
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+  \textbf{\Huge Gustavo Henrique de Jesus da Silva \vspace{2pt}} &
+  Location: SP - SP, Brazil \\
+
+  \href{https://linkedin.com/in/gustavo-henrique-de-jesus}{LinkedIn} $|$
+  \href{https://github.com/mrpunkdasilva}{GitHub} $|$
+  \href{https://tabnews.com.br/mrpunkdasilva}{TabNews} $|$
+  \href{https://dev.to/mrpunkdasilva}{Dev.to} &
+  Email: \href{mailto:gustavo.henrique.jesus@gmail.com}{gustavo.henrique.jesus@gmail.com} $|$
+  Mobile: +55 (11) 97881-2276 \\
+\end{tabular*}
+%--------------------------------------------
+
+
+%-----------SUMMARY--------------------------
+\section{Desenvolvedor(a) Front-end Júnior}
+\small{
+  Desenvolvedor Front-end com sólida base em HTML5, CSS3 e JavaScript (avançado) e TypeScript (intermediário), em transição de Fullstack para foco exclusivo em Front-end. Experiência prática com React.js e Next.js (avançado), Angular (intermediário) e Vue.js (básico), além de ecossistema moderno: Redux, React Router, TanStack Query, Tailwind CSS, Vite, CSS Modules. Vivência real em consumo de APIs REST/GraphQL, Firebase (Auth, Realtime Database, Firestore), WebSockets (Socket.IO) e componentização com foco em reutilização, acessibilidade (W3C) e responsividade (mobile-first). Domínio de Git/GitHub (avançado), CI/CD com GitHub Actions/Vercel, testes com Jest e metodologias ágeis. Atualmente atuo como System Analyst (foco Front-end) na Mutant, desenvolvendo interfaces com TypeScript, Redux e React. Busco oportunidade para crescer como Desenvolvedor Front-end Júnior na Eight Vision, contribuindo com interfaces de qualidade, vontade de aprender e evoluir junto ao time.
+}
+%--------------------------------------------
+
+
+%--------------SKILLS------------------------
+\section{Technical Skills}
+  \resumeHeadingListStart{}
+
+    \resumeSectionType{Frontend}{:}{React (Advanced), Next.js (Advanced), Angular (Intermediate), Vue.js (Basic), TypeScript (Intermediate), JavaScript ES6+ (Advanced), HTML5 (Advanced), CSS3/SCSS (Advanced), Tailwind CSS (Intermediate), Redux (Intermediate), TanStack Query (Basic), React Router (Advanced), CSS Modules (Intermediate), Vite (Intermediate), Headless UI (Intermediate), Framer Motion (Intermediate), jQuery (Intermediate), Bootstrap (Intermediate), Nuxt.js (Basic), RxJS (Intermediate), Angular Material (Intermediate), Socket.IO (Intermediate), THREE.js (Basic), Web Speech API (Basic), IndexedDB (Basic), Service Workers (Basic), W3C Accessibility (Intermediate)}
+
+    \resumeSectionType{Backend and APIs}{:}{Node.js/Express (Advanced), Firebase Auth/Realtime/Firestore (Advanced), REST APIs (Advanced), GraphQL (Basic), JWT (Intermediate), PHP (Intermediate), Laravel (Intermediate), Java/Spring Boot (Basic), Python (Advanced)}
+
+    \resumeSectionType{Databases}{:}{MongoDB (Advanced), PostgreSQL (Intermediate), MySQL (Intermediate), SQLite (Basic), Firebase Realtime Database (Advanced), Firestore (Advanced)}
+
+    \resumeSectionType{DevOps and Tools}{:}{Git (Advanced), GitHub (Advanced), GitHub Actions (Intermediate), GitLab CI/CD (Intermediate), Docker (Intermediate), Vercel (Advanced), Vite (Intermediate), Webpack (Intermediate), NPM (Advanced), Jest (Intermediate), Figma (Intermediate), Jira (Intermediate), Linux (Intermediate), AWS (Basic), Kubernetes (Basic)}
+
+    \resumeSectionType{Methodologies and Principles}{:}{Agile/Scrum (Advanced), SOLID, DRY, KISS, Responsive/Mobile-First Design, Componentization, Automated Testing, Conventional Commits}
+
+  \resumeHeadingListEnd{}
+%--------------------------------------------
+
+
+%-----------EXPERIENCE-----------------------
+\section{Experience}
+\resumeHeadingListStart{}
+
+  \resumeQuadHeading{System Analyst (Front-end Focus)}{Oct 2025 -- Present}{Mutant}{Remote}
+    \resumeItemListStart{}
+
+      \resumeItem{Develop and maintain complex, responsive web applications using React, TypeScript, and Redux, ensuring design fidelity and global state consistency}
+
+      \resumeItem{Improve frontend loading performance, optimize user experience, and deliver scalable digital solutions within deadlines}
+
+      \resumeItem{Consume REST APIs, integrate with backend services, conduct code reviews, and maintain CI/CD pipelines}
+
+    \resumeItemListEnd{}
+
+  \resumeQuadHeading{Freelance Web Developer}{Apr 2022 -- Sep 2022}{Cadmo SA Dental Clinic}{São Paulo, Brazil}
+    \resumeItemListStart{}
+
+      \resumeItem{Planned, designed, and built a full-stack web system end-to-end using PHP, MySQL, and JavaScript, leading the full application lifecycle from database modeling to frontend-backend integration}
+
+      \resumeItem{Delivered a secure, scalable, and fully responsive dental management system that digitized and optimized clinical administrative operations}
+
+    \resumeItemListEnd{}
+
+  \resumeQuadHeading{Freelance Web Developer}{Nov 2023}{JVJ E-commerce}{São Paulo, Brazil}
+    \resumeItemListStart{}
+
+      \resumeItem{Developed a functional prototype and responsive homepage with visual identity using HTML, CSS, JavaScript, jQuery, and Bootstrap in just 2 days}
+
+      \resumeItem{Ensured cross-browser compatibility and usability focus for final project presentation}
+
+    \resumeItemListEnd{}
+
+  \resumeQuadHeading{Volunteer Programming Mentor}{Jul 2025 -- Sep 2025}{Jala University}{Remote}
+    \resumeItemListStart{}
+
+      \resumeItem{Conducted 34 hours of mentoring in Programming 1, Programming 2, and Software Development 1 courses, covering Java, algorithms, data structures, and software engineering fundamentals}
+
+      \resumeItem{Created interactive educational material ("NetRunner: Java Mastery Guide") to support student learning journeys}
+
+      \resumeItem{Strengthened mentees' technical understanding and contributed to their academic growth}
+
+    \resumeItemListEnd{}
+
+\resumeHeadingListEnd{}
+%---------------------------------------------
+
+
+%-----------EDUCATION-------------------------
+\section{Education}
+  \resumeHeadingListStart{}
+
+  \resumeQuadHeading{Jala University}{Bachelor's Degree in Software Engineering}{Jul 2024 -- Dec 2028 (In Progress)}{}
+
+  \resumeQuadHeading{ETEC Francisco Morato}{Technician in Systems Development}{Feb 2022 -- Sep 2023}{}
+
+  \resumeQuadHeading{ETEC Francisco Morato}{High School with Technical Qualification in Internet Informatics}{2021 -- 2023}{}
+
+  \resumeQuadHeading{CES Dublin, Ireland}{English Immersion Exchange Program (60h)}{Dec 2022 -- Feb 2023}{}
+
+  \resumeQuadHeading{Escola Modelo}{Web Design Course (UI/UX, Graphic Design, Front-end)}{Oct 2019 -- Oct 2021}{}
+
+  \resumeHeadingListEnd{}
+%---------------------------------------------
+
+
+%-----------PROJECTS--------------------------
+
+\section{Projects}
+  \resumeHeadingListStart{}
+
+    \resumeTrioHeading{\href{https://github.com/mrpunkdasilva/cybernews}{CyberNews - Cyberpunk Hacker News Client}}{Next.js, TypeScript, TailwindCSS, Framer Motion, IndexedDB, Web Speech API}{\href{https://github.com/mrpunkdasilva/cybernews}{Source Code}}
+      \resumeItemListStart{}
+
+        \resumeItem{Offline-first PWA with Service Workers and IndexedDB for intelligent caching and 100\textbackslash{}% offline functionality}
+
+        \resumeItem{Immersive retro-futuristic interface with Framer Motion terminal animations (CRT effect, matrix rain, boot sequence), vim-style keyboard navigation, and Web Speech API voice commands}
+
+        \resumeItem{Customizable cyberpunk/retrowave themes, article decryption animations, multiple data sources, optimized Vercel deploy with edge functions}
+
+      \resumeItemListEnd{}
+
+    \resumeTrioHeading{\href{https://github.com/Opaleiros-Foundation/Opala-Filmes}{Opala Filmes - Real-time Movie Voting Platform}}{Next.js, React, Firebase Auth, Firebase Realtime Database, Firestore, TailwindCSS, Headless UI}{\href{https://github.com/Opaleiros-Foundation/Opala-Filmes}{Source Code}}
+      \resumeItemListStart{}
+
+        \resumeItem{Full-stack social application for watchlist management, 5-star voting, and random movie discovery with real-time synchronization via Firebase Realtime Database and Firestore}
+
+        \resumeItem{Complete authentication via Firebase Auth (email/password, OAuth), route protection, session management, and responsive dark/light interface}
+
+        \resumeItem{Serverless architecture with Next.js API Routes, recommendation algorithms, watched movie tracking, user statistics, and continuous Vercel deployment}
+
+      \resumeItemListEnd{}
+
+    \resumeTrioHeading{\href{https://github.com/mrpunkdasilva/doces_da_thay}{Doces da Thay - E-commerce Frontend}}{jQuery, Bootstrap 5, HTML5, CSS3, JavaScript}{\href{https://github.com/mrpunkdasilva/doces_da_thay}{Source Code}}
+      \resumeItemListStart{}
+
+        \resumeItem{Complete e-commerce frontend for artisanal bakery with mobile-first approach and consistent design system}
+
+        \resumeItem{Responsive product gallery with touch-friendly carousel, fluid category navigation, intuitive purchase flow with client-side validation, WhatsApp Business integration for order completion}
+
+        \resumeItem{Git/GitHub versioning, modular component-organized code, asset optimization (WebP images, minification), continuous Netlify deploy with serverless forms}
+
+      \resumeItemListEnd{}
+
+    \resumeTrioHeading{\href{https://github.com/mrpunkdasilva/Blood-Donation-Project}{Blood Donation Project - Donor-Recipient Matching Platform}}{Next.js, TypeScript, TailwindCSS, Docker}{\href{https://github.com/mrpunkdasilva/Blood-Donation-Project}{Source Code}}
+      \resumeItemListStart{}
+
+        \resumeItem{Collaborative frontend development with Next.js, TypeScript, TailwindCSS containerized via Docker for consistent dev environment and standardized CI/CD}
+
+        \resumeItem{Intelligent matching system between donors and recipients based on geolocation, blood type, and urgency, with WCAG 2.1 accessible interface}
+
+        \resumeItem{Reusable component architecture, React Context/Hooks state management, Zod-validated forms, team workflow via Git/GitHub (PRs, code review, issues), Vercel deployment}
+
+      \resumeItemListEnd{}
+
+  \resumeHeadingListEnd{}
+
+%--------------------------------------------
+
+
+%----------------OTHERS----------------------
+
+\section{Languages}
+  \resumeItemListStart{}
+
+    \resumeItem{Portuguese: Native}
+
+    \resumeItem{English: B2 (Intermediate)}
+
+    \resumeItem{Spanish: Basic}
+
+  \resumeItemListEnd{}
+
+%--------------------------------------------
+
+\end{document}

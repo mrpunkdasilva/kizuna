@@ -1,0 +1,87 @@
+\documentclass[10pt,a4paper,sans]{moderncv}
+
+% modern themes
+\moderncvstyle{casual}
+\moderncvcolor{blue}
+
+% character encoding
+\usepackage[utf8]{inputenc}
+
+% adjust the page margins
+\usepackage[scale=0.75]{geometry}
+
+% personal data
+\name{[[ personal.name|e ]]}{}
+\title{Desenvolvedor Front-end Júnior}
+\address{[[ personal.location|e ]]}{}{}
+\phone[mobile]{[[ personal.phone|e ]]}
+\email{[[ personal.email|e ]]}
+\homepage{https://[[ personal.linkedin_clean ]]}
+\social[linkedin]{[[ personal.linkedin_clean ]]}
+\social[github]{[[ personal.github_clean ]]}
+
+\begin{document}
+
+\makecvtitle
+
+% RESUMO
+\section{Resumo Profissional}
+\small{[[ summary|e ]]}
+
+% EXPERIÊNCIA
+\section{Experiência Profissional}
+{% for exp in experiences %}
+  \cventry{[[ exp.period|e ]]}{[[ exp.title|e ]]}{[[ exp.company|e ]]}{[[ exp.location|e ]]}{}{\vspace{6pt}
+  \begin{itemize}
+  {% for bullet in exp.bullets %}
+    \item [[ bullet|e ]]
+  {% endfor %}
+  \end{itemize}
+  \vspace{8pt}
+}
+{% endfor %}
+
+% PROJETOS
+{% if featured_projects %}
+\section{Projetos em Destaque}
+{% for project in featured_projects %}
+  \cventry{}{[[ project.title|e ]]}{}{}{}{\vspace{4pt}
+  \textbf{Tecnologias:} [[ project.tech_stack | join(", ") | e ]] \\[4pt]
+  \begin{itemize}
+  {% for highlight in project.highlights %}
+    \item [[ highlight|e ]]
+  {% endfor %}
+  \end{itemize}
+  \vspace{6pt}
+  Link: \href{https://[[ project.github_clean ]]}{GitHub} \quad \href{https://[[ project.demo ]]}{Demo}
+  \vspace{8pt}
+}
+{% endfor %}
+{% endif %}
+
+% FORMAÇÃO
+\section{Formação Acadêmica}
+{% for edu in education %}
+  \cventry{[[ edu.period|e ]]}{[[ edu.title|e ]]}{[[ edu.institution|e ]]}{}{}{}
+  \vspace{4pt}
+{% endfor %}
+
+% HABILIDADES
+\section{Habilidades Técnicas}
+\begin{itemize}
+{% for category, skills in skills.items() %}
+  \item \textbf{[[ category|e ]]:} [[ skills | join(", ") | e ]]
+  \vspace{4pt}
+{% endfor %}
+\end{itemize}
+
+% IDIOMAS
+\section{Idiomas}
+\begin{itemize}
+{% for lang in languages %}
+  \item [[ lang.language|e ]]: [[ lang.level|e ]]
+  \vspace{4pt}
+{% endfor %}
+\end{itemize}
+
+\end{document}
