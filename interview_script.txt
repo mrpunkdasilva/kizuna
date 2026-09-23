@@ -1,0 +1,19 @@
+SCRIPT - "Tell me about yourself" (~1:45 min)
+
+---
+
+Hi, my name is Gustavo Henrique, and I'm a software engineer based in São Paulo, Brazil. I'm currently completing my Bachelor's degree in Software Engineering at Jala University, and I also hold a technical diploma in Systems Development.
+
+I started programming back in high school, and since then I've built a solid foundation in web development, both frontend and backend. My core stack includes React, Next.js, and TypeScript for the frontend, and Node.js with Express for the backend. I also have experience with Python, Java, and PHP, and I've worked with databases like MongoDB, PostgreSQL, and Firebase.
+
+Professionally, I'm currently working as a System Analyst at Mutant, where I build and maintain high-quality user interfaces using TypeScript, Redux, and React. Before that, I did freelance work developing web systems for local clients, including a full dental clinic management system and an e-commerce platform.
+
+One thing I'm really passionate about is giving back to the community. I've volunteered as a programming mentor at Jala University, guiding students through Java and software development fundamentals. It taught me a lot about communication and explaining technical concepts clearly.
+
+On the project side, I've built several full-stack applications. One that stands out is Black Nib, a blog platform with React and Node.js, featuring JWT authentication, MongoDB, and Docker containerization. Another is LinkBucket, a full-stack app for organizing and sharing technical resources, built with React, TypeScript, Java Spring, and Docker.
+
+I'm also a strong believer in writing clean, maintainable code. I follow principles like SOLID, DRY, and KISS, and I enjoy working with modern tools and best practices.
+
+What excites me most about software engineering is the constant learning and the ability to build things that solve real problems. I'm eager to bring my skills and enthusiasm to a team where I can contribute and keep growing as a developer.
+
+Thank you.

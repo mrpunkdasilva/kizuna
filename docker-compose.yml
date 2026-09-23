@@ -46,15 +46,13 @@ services:
       dockerfile: Dockerfile
     image: springboot-app
     container_name: springboot_app
-    depends_on:
-      - ollama
-      - python-scraper
-      - mongo
     ports:
       - "8080:8080"
     volumes:
       - ./curriculums:/app/curriculums
       - ./output:/app/output
+      - ./data:/app/data
+      - ./kizuna-kokoro:/app/kizuna-kokoro
     environment:
       - OLLAMA_HOST=http://ollama:11434
       - PYTHON_SCRAPER_HOST=http://python-scraper:8000

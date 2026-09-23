@@ -57,13 +57,21 @@ public class ResumeService {
             Path promptPath = Paths.get("kizuna-kokoro", "prompts", "tailor-resume.md");
             String template = Files.readString(promptPath);
             
+            String candidateJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(candidateData);
+            String jobJson = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(job);
+            
             return template
-                    .replace("[CANDIDATE_DATA]", candidateData.toString())
-                    .replace("[JOB_DATA]", job.toString());
+                    .replace("[CANDIDATE_DATA]", candidateJson)
+                    .replace("[JOB_DATA]", jobJson);
         } catch (Exception e) {
-            log.error("Error reading prompt template, falling back to basic prompt", e);
-            return "Atue como Kizuna Iporá. Crie um currículo em Markdown para a vaga: " + job.getTitle() + 
-                   " usando os dados: " + candidateData.toString();
+            log.error("Error reading prompt template or converting to JSON", e);
+            try {
+                String candidateJson = objectMapper.writeValueAsString(candidateData);
+                return "Atue como Kizuna Iporá. Crie um currículo em Markdown para a vaga: " + job.getTitle() + 
+                       " usando os dados: " + candidateJson;
+            } catch (Exception ex) {
+                return "Atue como Kizuna Iporá. Crie um currículo em Markdown para a vaga: " + job.getTitle();
+            }
         }
     }
 

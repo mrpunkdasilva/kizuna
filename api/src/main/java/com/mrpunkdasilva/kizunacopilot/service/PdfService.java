@@ -48,14 +48,14 @@ public class PdfService {
 
         // 3. Add professional CSS styling
         String styledHtml = "<html><head><style>" +
-                "@page { size: A4; margin: 2cm; }" +
-                "body { font-family: 'Helvetica', 'Arial', sans-serif; line-height: 1.4; color: #333; font-size: 10.5pt; margin: 0; }" +
+                "@page { size: A4; margin: 1cm; }" +
+                "body { font-family: 'Helvetica', 'Arial', sans-serif; line-height: 1.8; color: #333; font-size: 10.5pt; margin: 0; }" +
                 "h1 { color: #000; text-align: center; border-bottom: 2px solid #2c3e50; padding-bottom: 5px; text-transform: uppercase; font-size: 18pt; margin-top: 0; margin-bottom: 10px; }" +
                 "h2 { color: #2980b9; border-bottom: 1px solid #bdc3c7; margin-top: 15px; margin-bottom: 8px; padding-bottom: 3px; text-transform: uppercase; font-size: 13pt; font-weight: bold; }" +
                 "h3 { color: #2c3e50; margin-top: 10px; margin-bottom: 2px; font-size: 11pt; font-weight: bold; }" +
                 "p { margin: 3px 0; }" +
-                "ul { margin: 5px 0; padding-left: 1.2em; }" +
-                "li { margin-bottom: 2px; }" +
+                "ul { margin: 5px 0; padding-left: 1.2em; display: block; }" +
+                "li { margin-bottom: 8px; display: list-item; list-style-type: disc; }" +
                 "strong { color: #000; font-weight: bold; }" +
                 "em { color: #7f8c8d; font-style: italic; }" +
                 "hr { border: 0; border-top: 1px solid #eee; margin: 15px 0; }" +

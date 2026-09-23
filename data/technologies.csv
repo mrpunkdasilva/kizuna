@@ -1,0 +1,78 @@
+# id|name|desc|category
+html|HTML5|Advanced Skills|frontend
+responsive|Responsive Design|Advanced Skills|frontend
+css|CSS3|Advanced Skills|frontend
+sass|Sass|Advanced Skills|frontend
+js|JavaScript|Advanced Skills|frontend
+typescript|TypeScript|Intermediate Skills|frontend
+linux|Linux|Intermediate Skills|devops
+react|React|Advanced Skills|frontend
+redux|Redux|Intermediate Skills|frontend
+nextjs|Next.js|Advanced Skills|frontend
+vue|Vue.js|Basic Skills|frontend
+angular|Angular|Intermediate Skills|frontend
+tailwindcss|Tailwind CSS|Intermediate Skills|frontend
+rxjs|RxJS|Intermediate Skills|frontend
+material|Angular Material|Intermediate Skills|frontend
+headlessui|Headless UI|Intermediate Skills|frontend
+cssmodules|CSS Modules|Intermediate Skills|frontend
+vite|Vite|Intermediate Skills|frontend
+tanstack|TanStack Query|Basic Skills|frontend
+jquery|jQuery|Intermediate Skills|frontend
+bootstrap|Bootstrap|Intermediate Skills|frontend
+nuxtjs|Nuxt.js|Basic Skills|frontend
+reactrouter|React Router|Advanced Skills|frontend
+socketio|Socket.IO|Intermediate Skills|frontend
+threejs|THREE.js|Basic Skills|frontend
+framer|Framer Motion|Intermediate Skills|frontend
+webspeech|Web Speech API|Basic Skills|frontend
+indexeddb|IndexedDB|Basic Skills|frontend
+serviceworkers|Service Workers|Basic Skills|frontend
+accessibility|W3C Accessibility|Intermediate Skills|frontend
+nodejs|Node.js|Advanced Skills|backend
+express|Express|Advanced Skills|backend
+java|Java|Intermediate Skills|backend
+springboot|Spring Boot|Basic Skills|backend
+php|PHP|Intermediate Skills|backend
+laravel|Laravel|Intermediate Skills|backend
+python|Python|Advanced Skills|backend
+graphql|GraphQL|Basic Skills|backend
+jwt|JWT|Intermediate Skills|backend
+ejs|EJS|Basic Skills|backend
+shell|Shell/CLI|Intermediate Skills|backend
+maven|Maven|Basic Skills|backend
+composer|Composer|Basic Skills|backend
+mysql|MySQL|Intermediate Skills|database
+postgres|PostgreSQL|Intermediate Skills|database
+mongodb|MongoDB|Advanced Skills|database
+sqlServer|SQL Server|Basic Skills|database
+firebase|Firebase|Advanced Skills|database
+firebaseauth|Firebase Authentication|Advanced Skills|database
+realtimedb|Realtime Database|Advanced Skills|database
+sqlite|SQLite|Basic Skills|database
+phpmyadmin|phpMyAdmin|Intermediate Skills|database
+git|Git|Advanced Skills|devops
+github|GitHub|Advanced Skills|devops
+githubactions|GitHub Actions|Intermediate Skills|devops
+gitlab|GitLab|Intermediate Skills|devops
+docker|Docker|Intermediate Skills|devops
+gitlabci|GitLab CI/CD|Intermediate Skills|devops
+kubernetes|Kubernetes|Basic Skills|devops
+aws|AWS|Basic Skills|devops
+jenkins|Jenkins|Basic Skills|devops
+jest|Jest|Intermediate Skills|tools
+webpack|Webpack|Intermediate Skills|tools
+npm|NPM|Advanced Skills|tools
+jira|Jira|Intermediate Skills|tools
+swagger|Swagger|Intermediate Skills|tools
+figma|Figma|Intermediate Skills|tools
+vercel|Vercel|Advanced Skills|tools
+sanity|Sanity|Basic Skills|tools
+office|Microsoft Office|Advanced Skills|tools
+excel|Microsoft Excel|Advanced Skills|tools
+powerpoint|Microsoft PowerPoint|Advanced Skills|tools
+computerrepair|Computer Repair|Intermediate Skills|tools
+webdesign|Web Design|Advanced Skills|tools
+uiux|UI/UX Design|Intermediate Skills|tools
+prototyping|Prototyping|Intermediate Skills|tools
+agile|Agile Methodology|Advanced Skills|tools

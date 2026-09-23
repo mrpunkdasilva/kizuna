@@ -73,6 +73,55 @@ paths:
               schema:
                 $ref: 'python-scraper-api.yml#/components/schemas/ScrapedJobData'
 
+  /api/resume/pdf:
+    post:
+      summary: Generate PDF from Markdown
+      description: Generates a PDF file from a given Markdown file located in the 'curriculums' directory.
+      operationId: generatePdf
+      parameters:
+        - name: fileName
+          in: query
+          required: true
+          schema:
+            type: string
+          description: The name of the markdown file (e.g., 'resume.md').
+      responses:
+        '200':
+          description: PDF generated successfully
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: File not found
+        '500':
+          description: Error generating PDF
+
+  /api/resume/download/{fileName}:
+    get:
+      summary: Download generated PDF
+      description: Downloads a previously generated PDF file from the 'output' directory.
+      operationId: downloadPdf
+      parameters:
+        - name: fileName
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The name of the PDF file to download.
+      responses:
+        '200':
+          description: PDF file downloaded successfully
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: PDF file not found
+        '500':
+          description: Internal server error
+
 components:
   schemas:
     JobProcessRequest:
