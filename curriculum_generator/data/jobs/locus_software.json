@@ -1,0 +1,53 @@
+{
+  "job_slug": "locus_software",
+  "company": "Locus.software",
+  "position": "Desenvolvedor Frontend Pleno | Integra\u00e7\u00e3o de Plataformas e IA",
+  "summary": "Desenvolvedor Frontend Pleno com s\u00f3lida experi\u00eancia em HTML5, CSS3, JavaScript e TypeScript, com foco especializado em React, Next.js e Clojure/ClojureScript. Atua\u00e7\u00e3o pr\u00e1tica na constru\u00e7\u00e3o de plataformas internas e solu\u00e7\u00f5es digitais escal\u00e1veis, com \u00eanfase em integra\u00e7\u00e3o de sistemas, consumo de APIs REST, autentica\u00e7\u00e3o, gerenciamento de estado e desenvolvimento de interfaces responsivas e acess\u00edveis (mobile-first). Conhecimento s\u00f3lido em IA generativa, prompt design e integra\u00e7\u00e3o com LLMs, aplicando essas tecnologias para criar solu\u00e7\u00f5es inteligentes e interfaces conversacionais. Experi\u00eancia com manipula\u00e7\u00e3o e consumo de dados via SQL, versionamento com Git/GitHub e rotinas de CI/CD com foco em automa\u00e7\u00e3o e qualidade de c\u00f3digo. Colabora\u00e7\u00e3o ativa com times de Produto, Design e Dados, aplicando metodologias \u00e1geis, boas pr\u00e1ticas de componentiza\u00e7\u00e3o, reutiliza\u00e7\u00e3o de c\u00f3digo e otimiza\u00e7\u00e3o de performance. Busco oportunidade como Desenvolvedor Frontend Pleno na Locus.software para contribuir com interfaces de alta qualidade, inova\u00e7\u00e3o e evolu\u00e7\u00e3o cont\u00ednua junto ao time.",
+  "featured_projects": [
+    "opala_filmes",
+    "blood_donation",
+    "blog_black_nilb",
+    "doces_da_thay"
+  ],
+  "skills_priority": [
+    "React",
+    "TypeScript",
+    "Clojure/ClojureScript",
+    "Python",
+    "APIs REST",
+    "Autentica\u00e7\u00e3o",
+    "Gerenciamento de Estado",
+    "IA Generativa",
+    "Prompt Design",
+    "Integra\u00e7\u00e3o com LLMs",
+    "SQL",
+    "Git",
+    "GitHub",
+    "CI/CD"
+  ],
+  "ats_keywords": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "TypeScript",
+    "React",
+    "Clojure/ClojureScript",
+    "Python",
+    "APIs REST",
+    "Autentica\u00e7\u00e3o",
+    "Responsividade",
+    "Layouts Responsivos",
+    "Gerenciamento de Estado",
+    "IA Generativa",
+    "Prompt Design",
+    "LLMs",
+    "Git",
+    "GitHub",
+    "CI/CD",
+    "SQL",
+    "Desenvolvedor Frontend",
+    "Plataformas",
+    "Integra\u00e7\u00e3o de Plataformas",
+    "Intelig\u00eancia Artificial"
+  ]
+}
