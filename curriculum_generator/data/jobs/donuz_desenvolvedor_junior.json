@@ -1,0 +1,51 @@
+{
+  "job_slug": "donuz_desenvolvedor_junior",
+  "company": "Donuz",
+  "position": "Desenvolvedor Júnior (CLT)",
+  "summary": "Desenvolvedor Front-end em formação com foco em PHP, MySQL, Git, Bootstrap, HTML, CSS, JavaScript e jQuery. Cursando Ciência da Computação a partir do 4º período, com interesse em Laravel, Vue.js, Docker e Node.js. Experiência prática em desenvolvimento web: criei aplicações full-stack com PHP/MySQL na Clínica Odontológica Cadmo SA e desenvolvi protótipo responsivo de e-commerce (JVJ). Como Analista de Sistemas na Mutant, atuo com React, TypeScript e interfaces modernas, o que complementa bem a necessidade de criar hotsites, integrar sistemas e auxiliar na evolução da plataforma Donuz.",
+  "featured_projects": [
+    "doces_da_thay",
+    "blog_black_nilb",
+    "food_website",
+    "opala_filmes"
+  ],
+  "skills_priority": [
+    "PHP",
+    "Orientação a Objetos",
+    "MySQL",
+    "Git",
+    "Bootstrap",
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "jQuery",
+    "Laravel",
+    "Vue.js",
+    "Docker",
+    "Node.js",
+    "APIs REST",
+    "SOAP"
+  ],
+  "ats_keywords": [
+    "Desenvolvedor Júnior",
+    "PHP",
+    "MySQL",
+    "Git",
+    "Bootstrap",
+    "HTML5",
+    "CSS",
+    "JavaScript",
+    "jQuery",
+    "Laravel",
+    "Vue.js",
+    "Docker",
+    "Node.js",
+    "C#",
+    ".NET",
+    "ADO.NET",
+    "REST",
+    "SOAP",
+    "Hotsites",
+    "Integração de sistemas"
+  ]
+}

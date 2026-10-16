@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.Instant;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -38,6 +40,10 @@ public class JobPosting {
     private Object applicationsCount;
     
     private String sourceUrl;
+
+    private String status;
+    private String error;
+    private Instant createdAt;
 
     // AI Insights by Kizuna
     @JsonProperty("tech_stack")

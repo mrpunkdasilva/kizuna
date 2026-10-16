@@ -1,6 +1,6 @@
 package com.mrpunkdasilva.kizunacopilot.controller;
 
-import com.mrpunkdasilva.kizunacopilot.repository.JobPostingRepository;
+import com.mrpunkdasilva.kizunacopilot.service.JobScrapingService;
 import com.mrpunkdasilva.kizunacopilot.service.PdfService;
 import com.mrpunkdasilva.kizunacopilot.service.ResumeService;
 import io.micrometer.core.instrument.MeterRegistry;
@@ -25,14 +25,14 @@ public class ResumeController {
 
     private final PdfService pdfService;
     private final ResumeService resumeService;
-    private final JobPostingRepository jobPostingRepository;
+    private final JobScrapingService jobScrapingService;
     private final MeterRegistry meterRegistry;
 
     public ResumeController(PdfService pdfService, ResumeService resumeService, 
-                            JobPostingRepository jobPostingRepository, MeterRegistry meterRegistry) {
+                            JobScrapingService jobScrapingService, MeterRegistry meterRegistry) {
         this.pdfService = pdfService;
         this.resumeService = resumeService;
-        this.jobPostingRepository = jobPostingRepository;
+        this.jobScrapingService = jobScrapingService;
         this.meterRegistry = meterRegistry;
     }
 
@@ -61,7 +61,7 @@ public class ResumeController {
         log.info("Event: RESUME_TAILOR_REQUEST, JobId: {}", jobId);
         meterRegistry.counter("kizuna.resume.tailor.requests").increment();
 
-        return jobPostingRepository.findById(jobId)
+        return jobScrapingService.getJob(jobId)
                 .flatMap(resumeService::createTailoredResume)
                 .map(pdfFileName -> {
                     log.info("Event: RESUME_TAILOR_SUCCESS, File: {}", pdfFileName);

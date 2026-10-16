@@ -1,0 +1,48 @@
+{
+  "job_slug": "estagio_desenvolvedor_frontend",
+  "company": "Não informado",
+  "position": "Estágio em Desenvolvimento Front-end",
+  "summary": "Estudante de Engenharia de Software e desenvolvedor Front-end em início de carreira, com forte interesse por e-commerce e desenvolvimento de lojas virtuais. Tenho base sólida em HTML5, CSS3/SASS, JavaScript (ES6+) e responsividade, com experiência prática em React e TypeScript. No dia a dia, transformo layouts do Figma/Design System em componentes e páginas funcionais, corrijo bugs, faço integração com APIs e serviços externos e cuido da qualidade das entregas antes do envio ao time responsável. Atualmente atuo com tecnologia na Mutant, colaborando com times multidisciplinares e seguindo boas práticas de desenvolvimento e versionamento com Git/GitHub. Sou proativo, colaborativo e movido por aprender, com disposição para evoluir profissionalmente em equipe e contribuir com a performance e a experiência dos sites.",
+  "featured_projects": [
+    "doces_da_thay",
+    "food_website",
+    "blog_black_nilb",
+    "cybernews"
+  ],
+  "skills_priority": [
+    "HTML5",
+    "CSS3",
+    "SASS",
+    "JavaScript ES6+",
+    "React",
+    "TypeScript",
+    "Responsividade",
+    "Git",
+    "E-commerce",
+    "Integração com APIs",
+    "Figma",
+    "Design System",
+    "Performance",
+    "Boas Práticas de Desenvolvimento"
+  ],
+  "ats_keywords": [
+    "Front-end",
+    "HTML5",
+    "CSS",
+    "SASS",
+    "JavaScript",
+    "ES6+",
+    "React",
+    "TypeScript",
+    "Responsividade",
+    "E-commerce",
+    "Lojas Virtuais",
+    "Figma",
+    "Design System",
+    "APIs",
+    "Boas Práticas",
+    "Performance",
+    "Git",
+    "Estágio Desenvolvedor Front-end"
+  ]
+}

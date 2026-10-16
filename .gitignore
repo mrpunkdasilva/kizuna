@@ -41,3 +41,6 @@ docker-compose.override.yml
 .dockerignore
 !docker-compose.yml # Do not ignore the main docker-compose file
 
+# MongoDB persistent data (bind mount)
+mongo_data/
+

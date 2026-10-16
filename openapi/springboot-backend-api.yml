@@ -8,9 +8,21 @@ servers:
   - url: http://localhost:8080
     description: Spring Boot Backend Local Development Server
 
+tags:
+  - name: System
+    description: Health check and root endpoints.
+  - name: Jobs
+    description: Scraping and CRUD operations for job postings stored in MongoDB.
+  - name: Resume
+    description: Resume tailoring, generation and PDF download.
+  - name: AI
+    description: Direct content generation with the Ollama LLM.
+
 paths:
   /: 
     get:
+      tags:
+        - System
       summary: Root endpoint for health check (default Spring Boot 404)
       operationId: getRoot
       responses:
@@ -35,29 +47,12 @@ paths:
                     type: string
                     example: "/"
 
-  /api/ai/generate:
-    post:
-      summary: Generate content using Ollama LLM
-      description: Proxies or orchestrates a call to the Ollama service to generate text based on a prompt.
-      operationId: generateAIContent
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AIGenerationRequest'
-      responses:
-        '200':
-          description: Content generated successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AIGenerationResponse'
-
   /api/jobs/scrape:
     post:
+      tags:
+        - Jobs
       summary: Scrape and analyze a job vacancy
-      description: Calls the Python Scraper to extract data and use AI to analyze the job requirements.
+      description: Enqueues the scraping job, returns immediately with a PENDING job posting, and processes the analysis in the background. Poll GET /api/jobs/{id} until status is COMPLETED or FAILED.
       operationId: scrapeAndAnalyzeJob
       requestBody:
         required: true
@@ -66,15 +61,102 @@ paths:
             schema:
               $ref: '#/components/schemas/JobProcessRequest'
       responses:
-        '201':
-          description: Job scraped and saved successfully
+        '202':
+          description: Job accepted for processing
           content:
             application/json:
               schema:
-                $ref: 'python-scraper-api.yml#/components/schemas/ScrapedJobData'
+                $ref: '#/components/schemas/JobPosting'
+
+  /api/jobs:
+    get:
+      tags:
+        - Jobs
+      summary: List all saved job postings
+      description: Returns every job posting stored in MongoDB, newest first.
+      operationId: listJobs
+      responses:
+        '200':
+          description: List of job postings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JobPosting'
+
+  /api/jobs/{id}:
+    get:
+      tags:
+        - Jobs
+      summary: Get a saved job posting by id
+      description: Returns a single job posting stored in MongoDB.
+      operationId: getJobById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The MongoDB id of the job posting.
+      responses:
+        '200':
+          description: Job posting found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+        '404':
+          description: Job posting not found
+    put:
+      tags:
+        - Jobs
+      summary: Update a saved job posting by id
+      description: Updates only the fields provided in the request body (partial update).
+      operationId: updateJob
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The MongoDB id of the job posting.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobPosting'
+      responses:
+        '200':
+          description: Job posting updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobPosting'
+        '404':
+          description: Job posting not found
+    delete:
+      tags:
+        - Jobs
+      summary: Delete a saved job posting by id
+      description: Removes a job posting from MongoDB.
+      operationId: deleteJob
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The MongoDB id of the job posting.
+      responses:
+        '204':
+          description: Job posting deleted successfully
 
   /api/resume/pdf:
     post:
+      tags:
+        - Resume
       summary: Generate PDF from Markdown
       description: Generates a PDF file from a given Markdown file located in the 'curriculums' directory.
       operationId: generatePdf
@@ -99,6 +181,8 @@ paths:
 
   /api/resume/download/{fileName}:
     get:
+      tags:
+        - Resume
       summary: Download generated PDF
       description: Downloads a previously generated PDF file from the 'output' directory.
       operationId: downloadPdf
@@ -122,8 +206,112 @@ paths:
         '500':
           description: Internal server error
 
+  /api/ai/generate:
+    post:
+      tags:
+        - AI
+      summary: Generate content using Ollama LLM
+      description: Proxies or orchestrates a call to the Ollama service to generate text based on a prompt.
+      operationId: generateAIContent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AIGenerationRequest'
+      responses:
+        '200':
+          description: Content generated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIGenerationResponse'
+
 components:
   schemas:
+    JobPosting:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The MongoDB id of the job posting.
+        title:
+          type: string
+        company:
+          type: string
+        location:
+          type: string
+        work_style:
+          type: string
+        employment_type:
+          type: string
+        seniority:
+          type: string
+        salary:
+          type: string
+        description:
+          type: string
+        requirements:
+          type: array
+          items:
+            type: string
+        benefits:
+          type: array
+          items:
+            type: string
+        posted_at:
+          type: string
+        applications_count:
+          type: string
+        sourceUrl:
+          type: string
+        status:
+          type: string
+          description: Processing status of the job posting.
+          enum:
+            - PENDING
+            - COMPLETED
+            - FAILED
+        error:
+          type: string
+          nullable: true
+          description: Error message when status is FAILED.
+        createdAt:
+          type: string
+          format: date-time
+        tech_stack:
+          type: array
+          items:
+            type: string
+        soft_skills:
+          type: array
+          items:
+            type: string
+        pros:
+          type: array
+          items:
+            type: string
+        cons:
+          type: array
+          items:
+            type: string
+        ai_summary:
+          type: string
+        interview_tips:
+          type: array
+          items:
+            type: string
+        ats_keywords:
+          type: array
+          items:
+            type: string
+        compatibility_score:
+          type: string
+        company_values:
+          type: array
+          items:
+            type: string
+
     JobProcessRequest:
       type: object
       properties:
@@ -158,4 +346,3 @@ components:
         done:
           type: boolean
           description: Whether the generation is complete.
-
